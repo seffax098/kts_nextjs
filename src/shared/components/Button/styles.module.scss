@@ -1,0 +1,34 @@
+@use '@shared/styles/variables.scss' as *;
+
+.button {
+    height: 52px;
+    padding: $space-s $space-l;
+    gap: $space-xxs;
+    background-color: $button-primary-bg;
+    color: $button-primary-text;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: $button-primary-bg-hover;
+}
+
+.buttonLoading:hover {
+    background-color: $button-primary-bg;
+}
+
+.buttonDisabled {
+    background-color: $button-primary-bg-disabled !important;
+}
+
+.buttonLoading {
+    background-color: $button-primary-bg;
+}
+
+.button:active {
+    background-color: $button-primary-bg-active;
+}

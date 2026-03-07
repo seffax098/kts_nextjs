@@ -1,0 +1,54 @@
+@use '@shared/styles/variables.scss' as *;
+
+.multiDropdown {
+    position: relative;
+    max-width: 350px;
+}
+
+.inputDropdown {
+    max-width: 350px;
+}
+
+.inputDropdown::placeholder {
+    color: $text-primary;
+}
+
+.multiDropdownClose::placeholder {
+    color: $text-primary;
+}
+
+.multiDropdownEmpty::placeholder {
+    color: $text-secondary !important;
+}
+
+.multiDropdownOptions {
+    margin-top: 8px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: $dropdown-options-bg;
+    box-shadow: $shadow;
+    max-width: 350px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.multiDropdownOption {
+    height: 24px;
+    padding: $space-s $space-xs;
+    padding-bottom: $space-l;
+    color: $text-primary;
+}
+
+.multiDropdownOption:hover {
+    color: $text-secondary;
+}
+
+.multiDropdownOptionActive {
+    color: $text-accent !important;
+}
+
+.optionCheckbox {
+    -webkit-appearance: none;
+    appearance: none;
+}

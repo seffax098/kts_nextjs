@@ -1,0 +1,72 @@
+$brand: #518581;
+$text-primary: #000000;
+$text-secondary: #afadb5;
+$text-accent: #518581;
+$button-primary-bg: #518581;
+$button-primary-bg-hover: #86AAA7;
+$button-primary-bg-disabled: #D9D9D9;
+$button-primary-bg-active: #487773;
+$button-white-primary-bg-hover: #dfdfdf;
+$button-white-primary-bg-active: #aaaaaa;
+$button-primary-text: #FFFFFF;
+$button-primary-text-hover: #FFFFFF;
+$button-primary-text-disabled: #FFFFFF;
+$button-primary-text-active: #FFFFFF;
+$card-bg: #FFFFFF;
+$card-image-bg: #D9D9D9;
+$input-bg: #FFFFFF;
+$input-bg-disabled: #FFFFFF;
+$input-border: #FFFFFF;
+$input-placeholder: #AFADB5;
+$input-text: #000000;
+$input-border-focus: #518581;
+$input-text-disabled: #00000033;
+$dropdown-options-bg: #FFFFFF;
+$checkbox-bg: #FFFFFF;
+$checkbox-border: #FFFFFF;
+$checkbox-bg-hover: #FFFFFF;
+$checkbox-border-hover: #518581;
+$checkbox-bg-disabled: rgba(255, 255, 255, 0.5);
+$checkbox-border-disabled: rgba(255, 255, 255, 0);
+$checkbox-check-disabled: rgba(0, 0, 0, 0.2);
+
+$space-xxs: 8px;
+$space-xs: 12px;
+$space-s: 14px;
+$space-m: 24px;
+$space-l: 32px;
+$space-xl: 48px;
+$space-xxl: 80px;
+
+$shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+$breakpoint-s: 375px;
+$breakpoint-m: 768px;
+$breakpoint-l: 1024px;
+$breakpoint-xl: 1440px;
+
+@mixin respond($breakpoint) {
+    @if $breakpoint ==s {
+        @media (max-width: $breakpoint-s) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==m {
+        @media (max-width: $breakpoint-m) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==l {
+        @media (max-width: $breakpoint-l) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==xl {
+        @media (max-width: $breakpoint-xl) {
+            @content;
+        }
+    }
+}

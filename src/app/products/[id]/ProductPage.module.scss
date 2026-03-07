@@ -1,0 +1,19 @@
+@use '@shared/styles/variables.scss' as *;
+
+.productPage {
+    width: 92%;
+    margin: 100px auto;
+}
+
+.back__link {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 30px;
+}
+
+.product__content {
+    display: flex;
+    flex-direction: column;
+    gap: ($space-xxl);
+}

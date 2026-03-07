@@ -1,0 +1,12 @@
+@use '@shared/styles/variables.scss' as *;
+
+.back {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: ($space-xs);
+}
+
+.back__icon {
+    transform: rotate(180deg);
+}

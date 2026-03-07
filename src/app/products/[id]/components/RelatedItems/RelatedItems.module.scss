@@ -1,0 +1,27 @@
+@use '@shared/styles/variables.scss' as *;
+
+.relatedItems {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: $space-l;
+
+    @include respond(l) {
+        width: 100%;
+    }
+}
+
+.related__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: $space-xl;
+    justify-content: space-between;
+
+    @include respond(l) {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: $space-m;
+    }
+
+
+
+}

@@ -1,0 +1,58 @@
+@use '@shared/styles/variables.scss' as *;
+
+.imageSlider {
+    width: fit-content;
+    user-select: none;
+}
+
+.slider {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    overflow: hidden;
+
+    @include respond(xl) {
+        width: 450px;
+        height: 450px;
+    }
+
+    @include respond(l) {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.sliderImage {
+    object-fit: cover;
+    width: 600px;
+    height: auto;
+
+    @include respond(xl) {
+        width: 450px;
+    }
+
+    @include respond(l) {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 6px;
+}
+
+.prev {
+    left: 12px;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.next {
+    right: 12px;
+}

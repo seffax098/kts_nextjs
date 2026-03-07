@@ -1,0 +1,45 @@
+@use 'styles/variables.scss' as *;
+
+.divWrap {
+    position: relative;
+    display: inline-flex;
+}
+
+.checkboxWrapper {
+    position: relative;
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-color: $checkbox-bg;
+    box-sizing: border-box;
+}
+
+.checkboxWrapper:hover {
+    background-color: $checkbox-bg-hover;
+    border: 1px solid $checkbox-border-hover;
+}
+
+.checkboxIcon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+}
+
+.checkbox {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkboxWrapperDisabled {
+    background-color: $checkbox-bg-disabled;
+    border: 1px solid $checkbox-border-disabled;
+    cursor: default;
+}
+
+.checkboxWrapperDisabled:hover {
+    background-color: $checkbox-bg-disabled;
+    border: 1px solid $checkbox-border-disabled;
+}

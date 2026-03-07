@@ -1,0 +1,72 @@
+@use '@shared/styles/variables.scss' as *;
+
+.productCard {
+    display: flex;
+    gap: ($space-xl);
+    margin-top: ($space-l);
+    margin-right: $space-m;
+
+    @include respond(l) {
+        flex-direction: column;
+        margin: auto;
+    }
+}
+
+.body__text {
+    display: flex;
+    flex-direction: column;
+    gap: ($space-m);
+}
+
+.product__body {
+    display: flex;
+    flex-direction: column;
+    gap: ($space-xxl);
+
+    @include respond(xl) {
+        gap: $space-l;
+    }
+}
+
+.body__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: ($space-xl);
+
+    @include respond(xl) {
+        gap: $space-m;
+    }
+
+    @include respond(l) {
+        flex-direction: row;
+        gap: $space-xxl;
+    }
+
+    @include respond(m) {
+        flex-direction: column;
+        gap: $space-l;
+    }
+}
+
+.card__button {
+    display: flex;
+    gap: ($space-xl);
+
+    @include respond(m) {
+        gap: $space-m;
+    }
+}
+
+.button__addToCart {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+.button__addToCart:hover {
+    background-color: ($button-white-primary-bg-hover);
+}
+
+.button__addToCart:active {
+    background-color: ($button-white-primary-bg-active);
+}

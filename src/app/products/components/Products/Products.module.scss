@@ -1,0 +1,52 @@
+@use '@shared/styles/variables.scss' as *;
+
+.products {
+    max-width: 1240px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: ($space-xl);
+}
+
+.products__top {
+    display: flex;
+    flex-direction: column;
+    gap: ($space-m);
+}
+
+.products__search {
+    display: flex;
+}
+
+.search__input {
+    width: 100%;
+    background-color: ($input-bg);
+}
+
+.totalProducts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ($space-m);
+}
+
+.products__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: ($space-l);
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+
+    @include respond(l) {
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
+    }
+
+    @include respond(m) {
+        grid-template-columns: repeat(1, minmax(300px, 1fr));
+    }
+
+    @include respond(s) {
+        grid-template-columns: repeat(1, minmax(200px, 1fr));
+    }
+}

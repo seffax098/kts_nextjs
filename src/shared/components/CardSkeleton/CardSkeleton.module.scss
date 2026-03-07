@@ -1,0 +1,69 @@
+@use '@shared/styles/variables.scss' as *;
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    padding-bottom: $space-xl;
+    gap: $space-xl;
+    background-color: $card-bg;
+}
+
+.card:hover {
+    box-shadow: $shadow;
+    transform: translateY(-2px);
+}
+
+.cardHeader {
+    box-sizing: border-box;
+    width: 350px;
+    height: 350px;
+    background-color: rgba(217, 217, 217, 1);
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    gap: $space-l;
+    padding-right: $space-xs;
+    padding-left: $space-xs;
+}
+
+.cardText {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xxs;
+}
+
+.captionSlot {
+    background-color: rgba(217, 217, 217, 0.4);
+    width: 240px;
+    height: 18px;
+}
+
+.cardFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-xxs;
+}
+
+.cardTitle {
+    background-color: rgba(217, 217, 217, 0.4);
+    width: 336px;
+    height: 48px;
+}
+
+.cardSubtitle {
+    background-color: rgba(217, 217, 217, 0.4);
+    width: 336px;
+    height: 14px;
+}
+
+.cardActionSlot {
+    background-color: rgba(217, 217, 217, 0.4);
+    width: 149px;
+    height: 52px;
+}
