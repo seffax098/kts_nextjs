@@ -1,0 +1,40 @@
+@use '@shared/styles/variables.scss' as *;
+
+.products__item {
+    display: flex;
+    gap: $space-xl;
+    padding-right: $space-l;
+    border: 1px solid #518581;
+
+    @include respond(m) {
+        flex-direction: column;
+        width: 95%;
+    }
+}
+
+.image {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+
+    @include respond(m) {
+        width: 100%;
+    }
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.setQuantity {
+    display: flex;
+    align-items: center;
+    gap: $space-l;
+}
+
+.productContent {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+}
