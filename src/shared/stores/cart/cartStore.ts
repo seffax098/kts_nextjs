@@ -1,4 +1,4 @@
-import { makeAutoObservable, observable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { addToCart, getCart, removeFromCart } from "@api/cart";
 import type { ProductCart } from "@shared/types/product";
 import { RootStore } from "../root/RootStore";
@@ -14,9 +14,7 @@ export class CartStore {
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
 
-        makeAutoObservable(this, {
-            products: observable.ref
-        }, { autoBind: true });
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     get isEmpty() {
@@ -72,20 +70,58 @@ export class CartStore {
     }
 
     async plus(productId: number) {
+        const item = this.products.find((item) => item.product.id === productId);
+
+        if (item) {
+            runInAction(() => {
+                item.quantity += 1;
+            });
+
+            try {
+                await addToCart({ product: productId, quantity: 1 });
+            } catch (e) {
+                runInAction(() => {
+                    item.quantity -= 1;
+                });
+                console.error("Ошибка добавления в корзину:", e);
+            }
+
+            return;
+        }
+
         try {
             await addToCart({ product: productId, quantity: 1 });
             await this.load();
-        } catch (err) {
-            console.error('Ошибка добавления в корзину:', err);
+        } catch (e) {
+            console.error("Ошибка добавления в корзину:", e);
         }
-
     }
 
     async minus(productId: number) {
+        const index = this.products.findIndex(item => item.product.id === productId);
+        if (index === -1) return;
+
+        const item = this.products[index];
+        const prevQuantity = item.quantity;
+
+        runInAction(() => {
+            if (item.quantity === 1) {
+                this.products.splice(index, 1);
+            } else {
+                item.quantity -= 1;
+            }
+        });
+
         try {
             await removeFromCart({ product: productId, quantity: 1 });
-            await this.load();
         } catch (e) {
+            runInAction(() => {
+                if (prevQuantity === 1) {
+                    this.products.splice(index, 0, item);
+                } else {
+                    item.quantity = prevQuantity;
+                }
+            });
             console.error("Ошибка удаления из корзины:", e);
         }
     }

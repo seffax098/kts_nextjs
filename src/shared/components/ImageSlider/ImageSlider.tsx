@@ -15,16 +15,17 @@ const ImageSlider = ({ images }: { images: { url: string }[] }) => {
     }
 
     return (
-        <div className={styles.imageSlider}>
+        <div className={styles.wrapper}>
             <div className={styles.slider}>
                 <ArrowRight className={`${styles.prev} ${styles.icon}`} onClick={handlePrev} width={35} height={35} />
                 <Image
-                    key={currentUrl}
                     src={currentUrl}
                     alt={`Product image`}
                     className={styles.sliderImage}
                     width={600}
                     height={600}
+                    priority={current === 0}
+                    sizes="(max-width: 1024px) 100vw, 600px"
                 />
                 <ArrowRight className={`${styles.next} ${styles.icon}`} onClick={handleNext} width={35} height={35} />
             </div>

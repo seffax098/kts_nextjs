@@ -70,3 +70,11 @@
 .button__addToCart:active {
     background-color: ($button-white-primary-bg-active);
 }
+
+.product__left {
+    @include respond(xl) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
