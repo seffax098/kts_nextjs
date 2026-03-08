@@ -34,5 +34,5 @@ yarn lint
 
 ## Ссылки
 
-- Prod: https://your-vercel-url.vercel.app
+- Prod: https://kts-nextjs.vercel.app/
 - Repository: https://github.com/seffax098/kts_nextjs
