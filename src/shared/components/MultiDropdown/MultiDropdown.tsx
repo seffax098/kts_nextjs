@@ -33,8 +33,6 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   const [search, setSearch] = useState('');
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const selectedKeysString = value.map((v) => v.key).join(',');
-
   const filteredOptions = options.filter((option) =>
     option.value.toLowerCase().includes(search.toLowerCase())
   );
@@ -65,10 +63,10 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     if (!disabled) setIsOpen(true);
   };
 
-  const isEmpty = value.length === 0 && !isOpen;
   const closedValue = getTitle(value);
+  const isEmpty = value.length === 0 && !isOpen;
 
-  const displayValue = isOpen ? search : closedValue === selectedKeysString ? closedValue : '';
+  const displayValue = isOpen ? search : value.length ? closedValue : '';
 
   return (
     <div ref={wrapperRef} className={classNames(styles.multiDropdown, className)}>
@@ -83,6 +81,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         disabled={disabled}
         onMouseDown={openDropdown}
         placeholder={getTitle(value)}
+        readOnly={!isOpen}
         afterSlot={<Icon color="secondary" >{<ArrowDownIcon />}</Icon>}
       />
 
