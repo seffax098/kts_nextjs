@@ -7,23 +7,19 @@ import RelatedItem from './component/RelatedItem';
 interface Props {
   relatedItems: Product[];
   loading: boolean;
-  handleClick: (id: number) => void
 }
 
-const RelatedItems = ({ relatedItems, loading, handleClick }: Props) => {
+const RelatedItems = ({ relatedItems, loading }: Props) => {
   return (
     <div className={`${styles.relatedItems}`}>
       <Text view="title">Related Items</Text>
       <div className={`${styles.related__list}`}>
         {loading && <CardSkeleton />}
         {relatedItems.map((item) => {
-          const prodId = item.id
           return (
             <RelatedItem
               key={item.documentId}
               item={item}
-              handleClick={handleClick}
-              prodId={prodId}
             />
           )
         })}

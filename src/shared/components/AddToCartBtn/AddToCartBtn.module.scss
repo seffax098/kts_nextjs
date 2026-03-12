@@ -1,0 +1,14 @@
+@use '@shared/styles/variables.scss' as *;
+
+.inCart {
+    display: flex;
+    gap: $space-s;
+    align-items: center;
+}
+
+.btn {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border-radius: 50%;
+}

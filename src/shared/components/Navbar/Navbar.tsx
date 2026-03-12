@@ -48,21 +48,6 @@ const Navbar = () => {
               Products
             </Text>
           </Link>
-
-          <Text
-            className={`${styles.navbar__categories}`}
-            view={`${pathname === '/categories' ? 'p-20' : 'p-18'}`}
-            color={`${pathname === '/categories' ? 'accent' : 'primary'}`}
-          >
-            Categories
-          </Text>
-          <Text
-            className={`${styles.navbar__about_us}`}
-            view={`${pathname === '/about_us' ? 'p-20' : 'p-18'}`}
-            color={`${pathname === '/about_us' ? 'accent' : 'primary'}`}
-          >
-            About us
-          </Text>
         </div>
 
         <div className={`${styles.navbar__right}`}>
@@ -103,21 +88,6 @@ const Navbar = () => {
                 Products
               </Text>
             </Link>
-
-            <Text
-              className={`${styles.mobile__navbar__categories}`}
-              view={`${pathname === '/categories' ? 'p-20' : 'p-18'}`}
-              color={`${pathname === '/categories' ? 'accent' : 'primary'}`}
-            >
-              Categories
-            </Text>
-            <Text
-              className={`${styles.mobile__navbar__about_us}`}
-              view={`${pathname === '/about_us' ? 'p-20' : 'p-18'}`}
-              color={`${pathname === '/about_us' ? 'accent' : 'primary'}`}
-            >
-              About us
-            </Text>
           </div>
           <div className={styles.mobileMenu__right}>
             <Link href={'/authorization'}

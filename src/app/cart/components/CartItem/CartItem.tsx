@@ -15,10 +15,11 @@ interface Props {
 
 const CartItem = ({ product, onPlus, onMinus }: Props) => {
     const imageUrl = product.product?.images?.[0]?.url;
+    const prodId = product.product.id
 
     return (
         <li className={styles.products__item} key={product.id}>
-            <Image src={imageUrl} className={styles.image} alt={product.product.title} width={500} height={500} />
+            <Image src={imageUrl} className={styles.image} alt={product.product.title} width={500} height={500} loading="eager"/>
 
             <div className={styles.productContent}>
                 <div className={styles.title}>
@@ -29,7 +30,7 @@ const CartItem = ({ product, onPlus, onMinus }: Props) => {
 
                 <div className={styles.setQuantity}>
                     <div className={styles.minus}>
-                        <Button onClick={() => onMinus(product.product.id)}>−</Button>
+                        <Button onClick={() => onMinus(prodId)}>−</Button>
                     </div>
 
                     <div className={styles.quantity}>
@@ -37,7 +38,7 @@ const CartItem = ({ product, onPlus, onMinus }: Props) => {
                     </div>
 
                     <div className={styles.plus}>
-                        <Button onClick={() => onPlus(product.product.id)}>+</Button>
+                        <Button onClick={() => onPlus(prodId)}>+</Button>
                     </div>
                 </div>
 
