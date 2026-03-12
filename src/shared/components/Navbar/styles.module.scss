@@ -43,6 +43,12 @@
     bottom: -29px;
 }
 
+.cartLink {
+    display: flex;
+    align-items: center;
+    gap: $space-xxs;
+}
+
 .mobileMenu__link {
     text-decoration: none;
 

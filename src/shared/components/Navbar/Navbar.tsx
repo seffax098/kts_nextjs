@@ -7,11 +7,14 @@ import Logo from './Logo';
 import styles from './styles.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useCartStore } from '@/shared/stores/root/hooks';
+import { observer } from 'mobx-react-lite';
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const cartStore = useCartStore()
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -52,15 +55,16 @@ const Navbar = () => {
 
         <div className={`${styles.navbar__right}`}>
           <Link href={'/cart'}
-            className={`${pathname === '/cart' ? styles.link__activeIcon : styles.noactive} ${styles.link}`}>
+            className={`${pathname === '/cart' ? styles.link__activeIcon : styles.noactive} ${styles.link} ${styles.cartLink}`}>
+            <Text color={`${pathname === '/cart' ? 'accent' : 'primary'}`}>{cartStore.totalQuantity}</Text>
             <span className={`${styles.navbar__bag}`}>
-              <Bag width={30} height={30} color={`${pathname === '/cart' ? 'accent' : 'primary'}`}/>
+              <Bag width={30} height={30} color={`${pathname === '/cart' ? 'accent' : 'primary'}`} />
             </span>
           </Link>
           <Link href={'/authorization'}
             className={`${pathname === '/authorization' ? styles.link__activeIcon : styles.noactive} ${styles.link}`}>
             <span className={`${styles.navbar__user}`}>
-              <User width={30} height={30} color={`${pathname === '/authorization' ? 'accent' : 'primary'}`}/>
+              <User width={30} height={30} color={`${pathname === '/authorization' ? 'accent' : 'primary'}`} />
             </span>
           </Link>
         </div>
@@ -130,4 +134,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default observer(Navbar);
