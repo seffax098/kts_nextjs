@@ -21,3 +21,12 @@
 .notactive {
     background-color: $button-primary-bg-disabled;
 }
+
+.setIsLogin {
+    cursor: pointer;
+}
+
+.error {
+    margin: auto;
+    color: red;
+}
