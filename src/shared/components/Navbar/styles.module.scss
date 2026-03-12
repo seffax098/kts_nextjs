@@ -30,7 +30,17 @@
     width: 100%;
     height: 2px;
     background-color: ($brand);
-    bottom: -35px;
+    bottom: -34px;
+}
+
+.link__activeIcon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: ($brand);
+    bottom: -29px;
 }
 
 .mobileMenu__link {

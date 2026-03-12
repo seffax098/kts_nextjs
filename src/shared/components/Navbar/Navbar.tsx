@@ -51,14 +51,16 @@ const Navbar = () => {
         </div>
 
         <div className={`${styles.navbar__right}`}>
-          <Link href={'/cart'}>
+          <Link href={'/cart'}
+            className={`${pathname === '/cart' ? styles.link__activeIcon : styles.noactive} ${styles.link}`}>
             <span className={`${styles.navbar__bag}`}>
-              <Bag width={30} height={30} />
+              <Bag width={30} height={30} color={`${pathname === '/cart' ? 'accent' : 'primary'}`}/>
             </span>
           </Link>
-          <Link href={'/authorization'}>
+          <Link href={'/authorization'}
+            className={`${pathname === '/authorization' ? styles.link__activeIcon : styles.noactive} ${styles.link}`}>
             <span className={`${styles.navbar__user}`}>
-              <User width={30} height={30} />
+              <User width={30} height={30} color={`${pathname === '/authorization' ? 'accent' : 'primary'}`}/>
             </span>
           </Link>
         </div>
