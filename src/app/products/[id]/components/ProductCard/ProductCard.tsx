@@ -16,7 +16,7 @@ const ProductCard = ({ product }: Props) => {
       </div>
       <div className={`${styles.product__body}`}>
         <div className={`${styles.body__text}`}>
-          <Text view="title">{product.rating + '⭐  ' + product.title}</Text>
+          <Text view="title" className={styles.title}>{product.rating + '⭐  ' + product.title}</Text>
           <Text view="p-20" color="secondary">
             {product.description}
           </Text>

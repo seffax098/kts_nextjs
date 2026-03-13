@@ -78,3 +78,9 @@
         align-items: center;
     }
 }
+
+.title {
+    @include respond(s) {
+        font-size: 28px;
+    }
+}

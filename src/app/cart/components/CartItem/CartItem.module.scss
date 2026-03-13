@@ -3,11 +3,11 @@
 .products__item {
     display: flex;
     gap: $space-xl;
-    padding-right: $space-l;
     border: 1px solid #518581;
 
     @include respond(m) {
         flex-direction: column;
+        gap: $space-m;
         width: 95%;
     }
 }
@@ -31,10 +31,28 @@
     display: flex;
     align-items: center;
     gap: $space-l;
+
+    @include respond(m) {
+        gap: $space-s;
+    }
 }
 
 .productContent {
     display: flex;
+    padding: $space-s $space-l;
     flex-direction: column;
     gap: $space-xl;
+}
+
+.btn {
+    width: 70%;
+
+    @include respond(s) {
+        width: 50%;
+    }
+}
+
+.plus,
+.minus {
+    width: 64px;
 }

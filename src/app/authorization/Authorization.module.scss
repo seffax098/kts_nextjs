@@ -30,3 +30,9 @@
     margin: auto;
     color: red;
 }
+
+.authText {
+    @include respond(s) {
+        font-size: 24px;
+    }
+}

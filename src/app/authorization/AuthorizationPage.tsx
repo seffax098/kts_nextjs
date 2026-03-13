@@ -49,7 +49,7 @@ const Authorization = observer(() => {
 
     if (authStore.isAuth) {
         return <div className={styles.authorization}>
-            <Text view="title">Вы уже авторизованы.</Text>
+            <Text view="title" className={styles.authText}>Вы уже авторизованы.</Text>
             <Button onClick={async() => {
                 await authStore.logout()
                 cartStore.load()

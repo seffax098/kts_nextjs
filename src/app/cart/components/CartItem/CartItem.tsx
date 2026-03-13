@@ -24,26 +24,26 @@ const CartItem = ({ product, onPlus, onMinus }: Props) => {
             <div className={styles.productContent}>
                 <div className={styles.title}>
                     <Link href={`/products/${product.product.documentId}`} className={styles.link}>
-                        <Text view="title">{product.product.rating + '⭐  ' + product.product.title}</Text>
+                        <Text view="subtitle" className={styles.title}>{product.product.rating + '⭐  ' + product.product.title}</Text>
                     </Link>
                 </div>
 
                 <div className={styles.setQuantity}>
                     <div className={styles.minus}>
-                        <Button onClick={() => onMinus(prodId)}>−</Button>
+                        <Button onClick={() => onMinus(prodId)} className={styles.btn}>−</Button>
                     </div>
 
                     <div className={styles.quantity}>
-                        <Text view="subtitle">{product.quantity}</Text>
+                        <Text view="p-20" className={styles.quanText}>{product.quantity}</Text>
                     </div>
 
                     <div className={styles.plus}>
-                        <Button onClick={() => onPlus(prodId)}>+</Button>
+                        <Button onClick={() => onPlus(prodId)} className={styles.btn}>+</Button>
                     </div>
                 </div>
 
                 <div className={styles.Price}>
-                    <Text view="subtitle">Price: ${product.product.price * product.quantity}</Text>
+                    <Text view="p-20" className={styles.priceText}>Price: ${product.product.price * product.quantity}</Text>
                 </div>
             </div>
         </li>
