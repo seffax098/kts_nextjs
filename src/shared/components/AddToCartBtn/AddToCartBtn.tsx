@@ -35,7 +35,7 @@ const AddToCartBtn = ({ product }: Props) => {
         } else {
             router.push("/authorization");
         }
-    }, [initialized, isAuth, cartStore, router, quantity, loading]);
+    }, [initialized, isAuth, cartStore, router, loading]);
 
     if (quantity === 0) {
         return (

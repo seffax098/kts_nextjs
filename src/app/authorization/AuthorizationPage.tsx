@@ -50,10 +50,10 @@ const Authorization = observer(() => {
     if (authStore.isAuth) {
         return <div className={styles.authorization}>
             <Text view="title" className={styles.authText}>Вы уже авторизованы.</Text>
-            <Button onClick={async() => {
+            <Button onClick={async () => {
                 await authStore.logout()
                 cartStore.load()
-                }}>Log out</Button>
+            }}>Log out</Button>
         </div>;
     }
 
@@ -83,9 +83,7 @@ const Authorization = observer(() => {
                     {authStore.error && <div className={styles.error}>{authStore.error}</div>}
                     {authStore.ok && <div>{authStore.ok}</div>}
                 </form>
-                <div onClick={() => setIsLogin(false)} className={styles.setIsLogin}>
-                    <Text >Нет аккаунта?</Text>
-                </div>
+                <button onClick={() => setIsLogin(false)} className={styles.setIsLogin}>Нет аккаунта?</button>
             </div>
         )
     }
@@ -93,7 +91,7 @@ const Authorization = observer(() => {
     return (
         <div className={styles.authorization}>
             <div className={styles.buttons}>
-                <Text view="title">Registration</Text>
+                <Text view="title" className={styles.registration}>Registration</Text>
             </div>
 
             <form onSubmit={onSubmit} className={styles.form}>
@@ -105,6 +103,7 @@ const Authorization = observer(() => {
                 />
                 <Input
                     value={email}
+                    type="email"
                     onChange={setEmail}
                     placeholder="email"
                     name="email"
@@ -121,9 +120,7 @@ const Authorization = observer(() => {
                 {authStore.error && <div className={styles.error}>{authStore.error}</div>}
                 {authStore.ok && <div>{authStore.ok}</div>}
             </form>
-            <div onClick={() => setIsLogin(true)} className={styles.setIsLogin}>
-                <Text >Уже есть аккаунт?</Text>
-            </div>
+            <button onClick={() => setIsLogin(true)} className={styles.setIsLogin}>Уже есть аккаунт?</button>
         </div>
     );
 });

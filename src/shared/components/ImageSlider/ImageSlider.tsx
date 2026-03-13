@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ArrowRight from "../icons/ArrowRight";
 import styles from "./ImageSlider.module.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const ImageSlider = ({ images }: { images: { url: string }[] }) => {
     const [current, setCurrent] = useState(0);
