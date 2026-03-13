@@ -26,7 +26,7 @@ const CartPageClient = () => {
     if (!authStore.isAuth) {
         return (
             <div className={styles.cart}>
-                <Text view="title">Сначала нужно зарегистрироваться!</Text>
+                <Text view="subtitle" className={styles.notauth}>Сначала нужно зарегистрироваться!</Text>
             </div>
         );
     }

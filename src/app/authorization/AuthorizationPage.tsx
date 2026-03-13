@@ -91,7 +91,7 @@ const Authorization = observer(() => {
     return (
         <div className={styles.authorization}>
             <div className={styles.buttons}>
-                <Text view="title">Registration</Text>
+                <Text view="title" className={styles.registration}>Registration</Text>
             </div>
 
             <form onSubmit={onSubmit} className={styles.form}>

@@ -9,8 +9,20 @@
     gap: ($space-m);
     margin: auto;
     margin-bottom: 50px;
+    @include respond(s) {
+        gap: $space-xxs;
+    }
+}
+
+.productsInfo__title {
+    @include respond(s) {
+        font-size: 28px;
+    }
 }
 
 .productsInfo__description {
     text-align: center;
+    @include respond(s) {
+        font-size: 14px;
+    }
 }
