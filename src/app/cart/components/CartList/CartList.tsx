@@ -2,6 +2,7 @@ import type { ProductCart } from "@shared/types/product";
 import styles from "./CartList.module.scss";
 import Text from "@shared/components/Text";
 import CartItem from "../CartItem";
+import { observer } from "mobx-react-lite";
 
 interface Props {
     products: ProductCart[];
@@ -30,4 +31,4 @@ const CartList = ({ products, onPlus, onMinus, totalPrice }: Props) => {
     );
 };
 
-export default CartList;
+export default observer(CartList);

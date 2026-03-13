@@ -21,3 +21,18 @@
 .notactive {
     background-color: $button-primary-bg-disabled;
 }
+
+.setIsLogin {
+    cursor: pointer;
+}
+
+.error {
+    margin: auto;
+    color: red;
+}
+
+.authText {
+    @include respond(s) {
+        font-size: 24px;
+    }
+}

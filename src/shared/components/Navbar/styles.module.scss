@@ -30,7 +30,23 @@
     width: 100%;
     height: 2px;
     background-color: ($brand);
-    bottom: -35px;
+    bottom: -34px;
+}
+
+.link__activeIcon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: ($brand);
+    bottom: -29px;
+}
+
+.cartLink {
+    display: flex;
+    align-items: center;
+    gap: $space-xxs;
 }
 
 .mobileMenu__link {
@@ -60,27 +76,28 @@
     }
 }
 
-.mobile {
-    display: none;
+// .mobile {
+//     display: none;
 
-    @include respond(m) {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+//     @include respond(m) {
+//         position: relative;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
 
-        background: white;
-        z-index: 1000;
-        padding: 5px 20px;
-        margin-bottom: 50px;
-    }
-}
+//         background: white;
+//         z-index: 1000;
+//         padding: 5px 20px;
+//         margin-bottom: 50px;
+//     }
+// }
 
 .mobileMenu {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
+    padding: $space-xxs $space-s;
 
     background: white;
     transform: translateY(-10px);
@@ -121,4 +138,31 @@
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+}
+
+.mobile__navbar {
+    display: none;
+    z-index: 1001;
+
+    @include respond(m) {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background: white;
+        z-index: 1000;
+        padding: 5px 20px;
+        margin-bottom: 50px;
+    }
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    border: none;
+    padding: 0;
+    margin: 0;
+    z-index: 998;
 }

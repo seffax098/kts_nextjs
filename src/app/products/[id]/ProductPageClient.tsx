@@ -42,8 +42,11 @@ const ProductPage = ({ product, related }: { product: Product; related: Product[
       </Link>
       <div className={`${styles.product__content}`}>
         {productStore.loading && <SkeletonCard />}
-        {!productStore.loading && productStore.product && <ProductCard product={productStore.product} handleClick={handleClick} />}
-        {productStore.relatedItems.length > 0 && <RelatedItems relatedItems={productStore.relatedItems} loading={productStore.relatedLoading} handleClick={handleClick} />}
+        {!productStore.loading && productStore.product && <ProductCard product={productStore.product} />}
+        {productStore.relatedItems.length > 0 &&
+          <RelatedItems
+            relatedItems={productStore.relatedItems}
+            loading={productStore.relatedLoading} />}
       </div>
     </div>
   );

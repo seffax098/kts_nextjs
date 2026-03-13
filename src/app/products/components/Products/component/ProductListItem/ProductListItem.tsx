@@ -1,17 +1,15 @@
 import styles from './ProductListItem.module.scss'
 import type { Product } from "@shared/types/product";
 import Card from "@shared/components/Card";
-import Button from "@shared/components/Button";
 import { memo } from "react";
 import Link from 'next/link';
+import AddToCartBtn from '@/shared/components/AddToCartBtn';
 
 interface Props {
     product: Product
-    prodId: number
-    handleClick: (prodId: number) => void
 }
 
-const ProductListItem = ({ product, prodId, handleClick }: Props) => {
+const ProductListItem = ({ product }: Props) => {
     return (
         <div className={styles.product__item}>
             <Link href={`/products/${product.documentId}`} className={`${styles.item__link}`}>
@@ -23,14 +21,7 @@ const ProductListItem = ({ product, prodId, handleClick }: Props) => {
                     captionSlot={product.productCategory.title}
                     contentSlot={`$${product.price}`}
                     actionSlot={
-                        <Button
-                            disabled={!product.isInStock}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                handleClick(prodId)
-                            }}
-                        >{product.isInStock ? 'Add to Cart' : 'Not in Stock'}</Button>
+                        <AddToCartBtn product={product}/>
                     }
                 />
             </Link>

@@ -10,10 +10,8 @@ import CardSkeleton from '@shared/components/CardSkeleton';
 import { observer } from 'mobx-react-lite';
 import Filters from '../Filters';
 import ProductListItem from './component/ProductListItem';
-import { useRouter } from 'next/navigation';
 import CategoriesStore from '@/shared/stores/categories/CategoriesStore';
 import ProductsPageStore from '@/shared/stores/products/ProductsPageStore';
-import { useAuthStore, useCartStore } from '@/shared/stores/root/hooks';
 
 interface Props {
   pageStore: ProductsPageStore;
@@ -21,12 +19,7 @@ interface Props {
 }
 
 const Products = ({ pageStore, categoriesStore }: Props) => {
-  const authStore = useAuthStore();
-  const cartStore = useCartStore()
-  const router = useRouter();
   const { queryStore, productsStore } = pageStore;
-  const initialized = authStore.initialized;
-  const isAuth = authStore.isAuth;
 
   const handleChangeSearch = useCallback((value: string) => {
     pageStore.changeSearchDraft(value);
@@ -44,16 +37,6 @@ const Products = ({ pageStore, categoriesStore }: Props) => {
     pageStore.changePage(newPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [pageStore]);
-
-  const handleClick = useCallback((productId: number) => {
-    if (!initialized) return;
-
-    if (isAuth) {
-      cartStore.plus(productId);
-    } else {
-      router.push("/authorization");
-    }
-  }, [initialized, isAuth, cartStore, router]);
 
   return (
     <div className={styles.products}>
@@ -89,14 +72,10 @@ const Products = ({ pageStore, categoriesStore }: Props) => {
         {!productsStore.loading && (
           <ul className={styles.products__list}>
             {productsStore.products.map((product) => {
-              const prodId = product.id;
-
               return (
                 <ProductListItem
                   key={product.documentId}
                   product={product}
-                  prodId={prodId}
-                  handleClick={handleClick}
                 />
               );
             })}

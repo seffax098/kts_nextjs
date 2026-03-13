@@ -5,10 +5,11 @@ import Input from "@shared/components/Input";
 import styles from './Authorization.module.scss'
 import { observer } from "mobx-react-lite";
 import Text from "@shared/components/Text";
-import { useAuthStore } from "@/shared/stores/root/hooks";
+import { useAuthStore, useCartStore } from "@/shared/stores/root/hooks";
 
 const Authorization = observer(() => {
     const authStore = useAuthStore()
+    const cartStore = useCartStore()
 
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState("");
@@ -26,6 +27,7 @@ const Authorization = observer(() => {
                     return;
                 }
                 await authStore.login(identifier, password);
+                cartStore.load()
             } else {
                 if (!username.trim() || !email.trim() || !password) {
                     authStore.setError("Заполните username, email и пароль")
@@ -47,64 +49,81 @@ const Authorization = observer(() => {
 
     if (authStore.isAuth) {
         return <div className={styles.authorization}>
-            <Text view="title">Вы уже авторизованы.</Text>
-            <Button onClick={() => authStore.logout()}>Log out</Button>
+            <Text view="title" className={styles.authText}>Вы уже авторизованы.</Text>
+            <Button onClick={async() => {
+                await authStore.logout()
+                cartStore.load()
+                }}>Log out</Button>
         </div>;
+    }
+
+    if (isLogin) {
+        return (
+            <div className={styles.authorization}>
+                <div className={styles.buttons}>
+                    <Text view="title">Log in</Text>
+                </div>
+
+                <form onSubmit={onSubmit} className={styles.form}>
+                    <Input
+                        value={identifier}
+                        onChange={setIdentifier}
+                        placeholder="username"
+                        name="identifier"
+                    />
+                    <Input
+                        value={password}
+                        onChange={setPassword}
+                        placeholder="password"
+                        name="password"
+                        type="password"
+                    />
+
+                    <Button type="submit" loading={authStore.loading}>{"Enter"}</Button>
+                    {authStore.error && <div className={styles.error}>{authStore.error}</div>}
+                    {authStore.ok && <div>{authStore.ok}</div>}
+                </form>
+                <div onClick={() => setIsLogin(false)} className={styles.setIsLogin}>
+                    <Text >Нет аккаунта?</Text>
+                </div>
+            </div>
+        )
     }
 
     return (
         <div className={styles.authorization}>
             <div className={styles.buttons}>
-                <Button onClick={() => setIsLogin(true)} className={isLogin ? styles.active : styles.notactive}>Log in</Button>
-                <Button onClick={() => setIsLogin(false)} className={!isLogin ? styles.active : styles.notactive}>Registration</Button>
+                <Text view="title">Registration</Text>
             </div>
 
             <form onSubmit={onSubmit} className={styles.form}>
-                {isLogin ? (
-                    <>
-                        <Input
-                            value={identifier}
-                            onChange={setIdentifier}
-                            placeholder="username"
-                            name="identifier"
-                        />
-                        <Input
-                            value={password}
-                            onChange={setPassword}
-                            placeholder="password"
-                            name="password"
-                            type="password"
-                        />
-                    </>
-                ) : (
-                    <>
-                        <Input
-                            value={username}
-                            onChange={setUsername}
-                            placeholder="username"
-                            name="username"
-                        />
-                        <Input
-                            value={email}
-                            onChange={setEmail}
-                            placeholder="email"
-                            name="email"
-                        />
-                        <Input
-                            value={password}
-                            onChange={setPassword}
-                            placeholder="password"
-                            name="password"
-                            type="password"
-                        />
-                    </>
-                )}
+                <Input
+                    value={username}
+                    onChange={setUsername}
+                    placeholder="username"
+                    name="username"
+                />
+                <Input
+                    value={email}
+                    onChange={setEmail}
+                    placeholder="email"
+                    name="email"
+                />
+                <Input
+                    value={password}
+                    onChange={setPassword}
+                    placeholder="password"
+                    name="password"
+                    type="password"
+                />
 
                 <Button type="submit" loading={authStore.loading}>{"Enter"}</Button>
+                {authStore.error && <div className={styles.error}>{authStore.error}</div>}
+                {authStore.ok && <div>{authStore.ok}</div>}
             </form>
-
-            {authStore.error && <div>{authStore.error}</div>}
-            {authStore.ok && <div>{authStore.ok}</div>}
+            <div onClick={() => setIsLogin(true)} className={styles.setIsLogin}>
+                <Text >Уже есть аккаунт?</Text>
+            </div>
         </div>
     );
 });

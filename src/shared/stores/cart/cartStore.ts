@@ -28,6 +28,15 @@ export class CartStore {
         }, 0)
     }
 
+    getQuantity(id: number) {
+        const item = this.products.find((item) => item.product.id === id)
+        return item?.quantity ?? 0
+    }
+
+    get totalQuantity() {
+        return this.products.reduce((sum, item) => sum + item.quantity, 0)
+    }
+
     async load() {
         if (!this.rootStore.authStore.authorized) {
             runInAction(() => {

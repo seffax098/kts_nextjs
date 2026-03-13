@@ -1,18 +1,14 @@
 import styles from './ProductCard.module.scss';
 import Text from '@shared/components/Text';
-import Button from '@shared/components/Button';
 import type { Product } from '@shared/types/product';
 import ImageSlider from '@/shared/components/ImageSlider';
+import AddToCartBtn from '@/shared/components/AddToCartBtn';
 
 interface Props {
   product: Product;
-  handleClick: (prodId: number) => void
 }
 
-const ProductCard = ({ product, handleClick }: Props) => {
-  const prodId = product.id
-
-
+const ProductCard = ({ product }: Props) => {
   return (
     <div className={`${styles.productCard}`}>
       <div className={`${styles.product__left}`}>
@@ -20,7 +16,7 @@ const ProductCard = ({ product, handleClick }: Props) => {
       </div>
       <div className={`${styles.product__body}`}>
         <div className={`${styles.body__text}`}>
-          <Text view="title">{product.rating + '⭐  ' + product.title}</Text>
+          <Text view="title" className={styles.title}>{product.rating + '⭐  ' + product.title}</Text>
           <Text view="p-20" color="secondary">
             {product.description}
           </Text>
@@ -28,12 +24,7 @@ const ProductCard = ({ product, handleClick }: Props) => {
         <div className={`${styles.body__bottom}`}>
           <Text view="title">${product.price}</Text>
           <div className={`${styles.card__button}`}>
-            <Button
-              disabled={!product.isInStock}
-              className={`${styles.button__buy}`}
-              onClick={() => {
-                handleClick(prodId)
-              }}>{product.isInStock ? 'Add to Cart' : 'Not in Stock'}</Button>
+            <AddToCartBtn product={product}/>
           </div>
         </div>
       </div>

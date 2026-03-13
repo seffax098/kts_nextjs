@@ -1,17 +1,15 @@
-import Button from "@shared/components/Button";
 import Card from "@shared/components/Card";
 import type { Product } from "@shared/types/product";
 import styles from './RelatedItem.module.scss'
 import { memo } from "react";
 import Link from "next/link";
+import AddToCartBtn from "@/shared/components/AddToCartBtn";
 
 interface Props {
     item: Product
-    prodId: number
-    handleClick: (prodId: number) => void
 }
 
-const RelatedItem = ({ item, prodId, handleClick }: Props) => {
+const RelatedItem = ({ item }: Props) => {
     return (
         <div>
             <Link
@@ -27,16 +25,7 @@ const RelatedItem = ({ item, prodId, handleClick }: Props) => {
                     captionSlot={item.productCategory.title}
                     contentSlot={`$${item.price}`}
                     actionSlot={
-                        <Button
-                            disabled={!item.isInStock}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                handleClick(prodId)
-                            }}
-                        >
-                            {item.isInStock ? 'Add to cart' : 'Not in Stock'}
-                        </Button>
+                        <AddToCartBtn product={item}/>
                     }
                 />
             </Link>
