@@ -81,11 +81,11 @@ export class AuthorizationStore {
                 this.user = response.user;
                 this.authorized = true;
                 this.initialized = true;
-                this.ok = `Вы вошли как ${response.user.username}`;
+                this.ok = `You are logged in as ${response.user.username}`;
             });
         } catch (e: unknown) {
             runInAction(() => {
-                this.error = e instanceof Error ? e.message : "Ошибка авторизации";
+                this.error = e instanceof Error ? e.message : "Authorization error";
             });
             throw e;
         } finally {
@@ -113,11 +113,11 @@ export class AuthorizationStore {
                 this.user = response.user;
                 this.authorized = true;
                 this.initialized = true;
-                this.ok = `Аккаунт создан: ${response.user.username}`;
+                this.ok = `Account created: ${response.user.username}`;
             });
         } catch (e: unknown) {
             runInAction(() => {
-                this.error = e instanceof Error ? e.message : "Ошибка регистрации";
+                this.error = e instanceof Error ? e.message : "Registration error";
             });
             throw e;
         } finally {

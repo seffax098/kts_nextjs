@@ -5,11 +5,11 @@ import Link from "next/link"
 export default function NotFound() {
     return (
         <div className={styles.notFound}>
-            <Text view="title">404 - Страница не найдена</Text>
-            <Text view="p-20">К сожалению, такой страницы не существует.</Text>
+            <Text view="title">404 - Page not found</Text>
+            <Text view="p-20">Unfortunately, such a page does not exist.</Text>
             <div className={styles.actions}>
                 <Link href="/" className={styles.primaryButton}>
-                    <Text>Вернуться в каталог</Text>
+                    <Text>Return to catalog</Text>
                 </Link>
             </div>
         </div>

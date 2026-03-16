@@ -8,13 +8,13 @@ import Link from "next/link";
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
     return (
         <div className={styles.error}>
-            <Text view="title">Произошла ошибка!</Text>
+            <Text view="title">Error!</Text>
             <Text view="p-20">{error.message}</Text>
             <div className={styles.actions}>
-                <Button onClick={() => reset()}>Попробовать снова</Button>
+                <Button onClick={() => reset()}>Try again</Button>
                 <Link href="/" className={styles.LinkButton}>
                     <Button>
-                        На главную
+                        Home
                     </Button>
                 </Link>
             </div>

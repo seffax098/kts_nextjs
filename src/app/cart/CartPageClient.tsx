@@ -20,18 +20,18 @@ const CartPageClient = () => {
 
 
     if (!authStore.initialized) {
-        return <div className={styles.cart}>Проверка сессии...</div>;
+        return <div className={styles.cart}>Checking the session...</div>;
     }
 
     if (!authStore.isAuth) {
         return (
             <div className={styles.cart}>
-                <Text view="subtitle" className={styles.notauth}>Сначала нужно зарегистрироваться!</Text>
+                <Text view="subtitle" className={styles.notauth}>You need to register first!</Text>
             </div>
         );
     }
 
-    if (cartStore.loading) return <div className={styles.cart}>Загрузка страницы...</div>;
+    if (cartStore.loading) return <div className={styles.cart}>Loading page...</div>;
 
     if (cartStore.error) {
         return (
@@ -44,7 +44,7 @@ const CartPageClient = () => {
     if (cartStore.isEmpty) {
         return (
             <div className={styles.cart}>
-                <div className={styles.empty}>В корзине нет товаров</div>
+                <div className={styles.empty}>There are no products in the cart</div>
             </div>
         );
     }
