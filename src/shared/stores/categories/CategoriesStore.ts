@@ -55,9 +55,9 @@ export default class CategoriesStore implements ILocalStore {
         } catch (e: unknown) {
             runInAction(() => {
                 if (e instanceof Error) {
-                    this.error = e.message || "Не удалось загрузить категории";
+                    this.error = e.message || "Failed to load categories";
                 } else {
-                    this.error = "Не удалось загрузить категории";
+                    this.error = "Failed to load categories";
                 }
             });
         } finally {

@@ -23,14 +23,14 @@ const Authorization = observer(() => {
         try {
             if (isLogin) {
                 if (!identifier.trim() || !password) {
-                    authStore.setError("Введите username и пароль")
+                    authStore.setError("Enter your username and password")
                     return;
                 }
                 await authStore.login(identifier, password);
                 cartStore.load()
             } else {
                 if (!username.trim() || !email.trim() || !password) {
-                    authStore.setError("Заполните username, email и пароль")
+                    authStore.setError("Fill in your username, email, and password.")
                     return;
                 }
                 await authStore.register(username, email, password);
@@ -42,14 +42,14 @@ const Authorization = observer(() => {
     if (!authStore.initialized) {
         return (
             <div className={styles.authorization}>
-                <Text view="title">Проверка сессии...</Text>
+                <Text view="title">Checking the session...</Text>
             </div>
         );
     }
 
     if (authStore.isAuth) {
         return <div className={styles.authorization}>
-            <Text view="title" className={styles.authText}>Вы уже авторизованы.</Text>
+            <Text view="title" className={styles.authText}>You are already logged in.</Text>
             <Button onClick={async () => {
                 await authStore.logout()
                 cartStore.load()
@@ -83,7 +83,7 @@ const Authorization = observer(() => {
                     {authStore.error && <div className={styles.error}>{authStore.error}</div>}
                     {authStore.ok && <div>{authStore.ok}</div>}
                 </form>
-                <button onClick={() => setIsLogin(false)} className={styles.setIsLogin}>Нет аккаунта?</button>
+                <button onClick={() => setIsLogin(false)} className={styles.setIsLogin}>Don't have an account?</button>
             </div>
         )
     }
@@ -120,7 +120,7 @@ const Authorization = observer(() => {
                 {authStore.error && <div className={styles.error}>{authStore.error}</div>}
                 {authStore.ok && <div>{authStore.ok}</div>}
             </form>
-            <button onClick={() => setIsLogin(true)} className={styles.setIsLogin}>Уже есть аккаунт?</button>
+            <button onClick={() => setIsLogin(true)} className={styles.setIsLogin}>Already have an account?</button>
         </div>
     );
 });

@@ -13,7 +13,7 @@ const roboto = Roboto({
 
 export const metadata = {
   title: 'Lalasia',
-  description: 'Интернет-магазин с широким ассортиментом товаров и удобным интерфейсом для покупок.',
+  description: 'An online store with a wide range of products and a user-friendly shopping interface.',
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {

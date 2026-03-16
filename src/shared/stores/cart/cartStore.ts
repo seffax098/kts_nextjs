@@ -61,12 +61,12 @@ export class CartStore {
         } catch (e: unknown) {
             runInAction(() => {
                 const message =
-                    e instanceof Error ? e.message : "Не удалось загрузить корзину";
+                    e instanceof Error ? e.message : "Failed to load cart";
 
                 this.error = message;
 
                 if (message === "Не авторизован") {
-                    this.rootStore.authStore.resetAuth("Сессия истекла, войдите снова");
+                    this.rootStore.authStore.resetAuth("Session expired, please log in again");
                     this.products = [];
                 }
             });
@@ -92,7 +92,7 @@ export class CartStore {
                 runInAction(() => {
                     item.quantity -= 1;
                 });
-                console.error("Ошибка добавления в корзину:", e);
+                console.error("Error adding to cart:", e);
             }
 
             return;
@@ -102,7 +102,7 @@ export class CartStore {
             await addToCart({ product: productId, quantity: 1 });
             await this.load();
         } catch (e) {
-            console.error("Ошибка добавления в корзину:", e);
+            console.error("Error adding to cart:", e);
         }
     }
 
@@ -131,7 +131,7 @@ export class CartStore {
                     item.quantity = prevQuantity;
                 }
             });
-            console.error("Ошибка удаления из корзины:", e);
+            console.error("Error deleting from recycle bin:", e);
         }
     }
 
