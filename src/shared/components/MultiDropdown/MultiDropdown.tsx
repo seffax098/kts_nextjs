@@ -66,6 +66,9 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   const closedValue = getTitle(value);
   const isEmpty = value.length === 0 && !isOpen;
 
+  const hasValue = value.length > 0;
+  const showSelectedAsPlaceholder = isOpen && !search && hasValue;
+
   const displayValue = isOpen ? search : value.length ? closedValue : '';
 
   return (
@@ -75,6 +78,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
           [styles.multiDropdownClose]: !isOpen,
           [styles.multiDropdownOpen]: isOpen,
           [styles.multiDropdownEmpty]: isEmpty,
+          [styles.selectedPlaceholder]: showSelectedAsPlaceholder,
         })}
         value={displayValue}
         onChange={setSearch}
@@ -96,7 +100,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
             >
               <input
                 className={styles.optionCheckbox}
-                type={single ? 'radio' : 'checkbox'}
+                type={'checkbox'}
                 checked={value.some((v) => v.key === option.key)}
                 onChange={() => toggleOption(option)}
               />
