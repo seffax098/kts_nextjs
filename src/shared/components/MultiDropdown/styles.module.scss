@@ -49,3 +49,13 @@
     -webkit-appearance: none;
     appearance: none;
 }
+
+.inputDropdown::placeholder {
+    color: #8f8f8f;
+    opacity: 1;
+}
+
+.selectedPlaceholder::placeholder {
+    color: #000;
+    opacity: 1;
+}
