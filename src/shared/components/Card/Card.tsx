@@ -1,8 +1,12 @@
+'use client';
 import React from 'react';
 import classNames from 'classnames';
 import Text from '../Text';
 import styles from './styles.module.scss';
 import Image from 'next/image';
+import { useInView } from '@shared/utils/useInView';
+
+const IMAGE_PRELOAD_MARGIN = '800px 0px';
 
 export type CardProps = {
     /** Дополнительный classname */
@@ -21,6 +25,7 @@ export type CardProps = {
     onClick?: React.MouseEventHandler;
     /** Слот для действия */
     actionSlot?: React.ReactNode;
+    preload?: boolean;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -32,12 +37,26 @@ const Card: React.FC<CardProps> = ({
     contentSlot,
     onClick,
     actionSlot,
+    preload = false,
     ...props
 }) => {
+    const [headerRef, nearViewport] = useInView<HTMLDivElement>(IMAGE_PRELOAD_MARGIN, !preload);
+
     return (
         <article className={classNames(styles.card, className)} onClick={onClick} {...props}>
-            <div className={styles.cardHeader}>
-                <Image src={image} alt="Фото товара" className={styles.cardImage} width={400} height={400} loading="eager"/>
+            <div ref={headerRef} className={styles.cardHeader}>
+                {nearViewport && (
+                    <Image
+                        src={image}
+                        alt="Фото товара"
+                        className={styles.cardImage}
+                        width={400}
+                        height={400}
+                        sizes="(max-width: 768px) 95vw, (max-width: 1024px) 48vw, 400px"
+                        preload={preload}
+                        loading={preload ? undefined : "eager"}
+                    />
+                )}
             </div>
             <div className={styles.cardBody}>
                 <div className={styles.cardText}>

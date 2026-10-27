@@ -8,7 +8,7 @@ export interface Image {
 
 export interface ProductCategory {
   title: string;
-  id: number;
+  id: string;
 }
 
 export interface ProductAttributes {
@@ -44,3 +44,32 @@ export interface ProductCartAttributes {
 
 export type Product = StrapiItem<ProductAttributes>;
 export type ProductCart = Item<ProductCartAttributes>
+
+export interface DummyProduct {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  rating: number;
+  stock: number;
+  images: string[];
+  thumbnail: string;
+  meta: {
+    createdAt: string;
+    updatedAt: string;
+  };
+}
+
+export interface DummyProductsResponse {
+  products: DummyProduct[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+export interface DummyCategory {
+  slug: string;
+  name: string;
+  url: string;
+}

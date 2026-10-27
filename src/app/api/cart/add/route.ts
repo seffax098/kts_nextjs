@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { API_URL } from "@/shared/constants/api";
 import { AUTH_COOKIE_NAME } from "@/shared/constants/auth";
+import { readCart, writeCart } from "@/api/cart-cookie";
+import type { CartAddRemoveBody } from "@/api/cart";
 
 export async function POST(request: Request) {
     const token = (await cookies()).get(AUTH_COOKIE_NAME)?.value;
@@ -13,26 +14,27 @@ export async function POST(request: Request) {
         );
     }
 
-    const body = await request.json();
+    const body = (await request.json().catch(() => null)) as CartAddRemoveBody | null;
+    const productId = Number(body?.product);
+    const quantity = Math.max(1, Number(body?.quantity ?? 1) || 1);
 
-    const res = await fetch(`${API_URL}/cart/add`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(body),
-        cache: "no-store",
-    });
-
-    const data = await res.json().catch(() => null);
-
-    if (!res.ok) {
+    if (!Number.isInteger(productId) || productId <= 0) {
         return NextResponse.json(
-            data ?? { error: { message: "Не удалось добавить товар" } },
-            { status: res.status }
+            { error: { message: "Некорректный товар" } },
+            { status: 400 }
         );
     }
 
-    return NextResponse.json(data);
+    const cart = await readCart();
+    const item = cart.find((entry) => entry.productId === productId);
+
+    if (item) {
+        item.quantity += quantity;
+    } else {
+        cart.push({ productId, quantity });
+    }
+
+    await writeCart(cart);
+
+    return NextResponse.json(cart);
 }

@@ -1,16 +1,62 @@
 @use '@shared/styles/variables.scss' as *;
 
 .cartList {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: $space-xl;
+    align-items: start;
+
+    @include respond(l) {
+        grid-template-columns: minmax(0, 1fr);
+        gap: $space-l;
+    }
 }
 
 .products__list {
     display: flex;
     flex-direction: column;
-    gap: $space-xl;
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid $divider;
 }
 
-.totalPrice {
-    text-align: center;
+.summary {
+    position: sticky;
+    top: $space-m;
+    display: flex;
+    flex-direction: column;
+    gap: $space-m;
+    padding: $space-l;
+    background-color: $card-bg;
+    box-shadow: $shadow;
+
+    @include respond(l) {
+        position: static;
+    }
+
+    @include respond(s) {
+        padding: $space-m $space-s;
+    }
+}
+
+.summary__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: $space-m;
+    border-top: 2px solid $divider;
+}
+
+.summary__link {
+    text-decoration: none;
+}
+
+.summary__button {
+    width: 100%;
 }

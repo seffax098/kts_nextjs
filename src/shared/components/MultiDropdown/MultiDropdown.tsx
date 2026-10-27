@@ -6,7 +6,7 @@ import ArrowDownIcon from '../icons/ArrowDownIcon';
 import Icon from '../icons/Icon';
 
 export type Option = {
-  key: number;
+  key: number | string;
   value: string;
 };
 

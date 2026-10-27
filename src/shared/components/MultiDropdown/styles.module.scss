@@ -27,9 +27,31 @@
     max-width: 350px;
     width: 100%;
     z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: $button-primary-bg-hover transparent;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $button-primary-bg-hover;
+
+        &:hover {
+            background-color: $brand;
+        }
+    }
 }
 
 .multiDropdownOption {
+    flex-shrink: 0;
     height: 24px;
     padding: $space-s $space-xs;
     padding-bottom: $space-l;

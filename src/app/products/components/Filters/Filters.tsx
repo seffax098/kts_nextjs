@@ -16,8 +16,8 @@ const sortLabels: Record<string, string> = {
     'price:desc': 'Price: High - Low',
     'rating:asc': 'Rating: Low - High',
     'rating:desc': 'Rating: High - Low',
-    'createdAt:asc': 'Oldest',
-    'createdAt:desc': 'Newest',
+    'title:asc': 'Name: A - Z',
+    'title:desc': 'Name: Z - A',
 }
 
 const Filters = ({ categoriesOptions, selectedCategories, handleDropdownChangeCat, selectedSorted, handleDropdownChangeSort }: Props) => {

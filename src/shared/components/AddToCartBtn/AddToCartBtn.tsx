@@ -1,12 +1,11 @@
 'use client'
 import { Product } from '@/shared/types/product';
 import Button from '../Button'
-import styles from './AddToCartBtn.module.scss'
+import QuantityStepper from '../QuantityStepper'
 import { useAuthStore, useCartStore } from '@/shared/stores/root/hooks';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import Text from '../Text';
 
 interface Props {
     product: Product
@@ -52,23 +51,11 @@ const AddToCartBtn = ({ product }: Props) => {
     }
 
     return (
-        <div className={styles.inCart}>
-            <Button
-                className={styles.btn}
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    cartStore.minus(product.id)
-                }}>-</Button>
-            <Text view='p-20'>{quantity}</Text>
-            <Button
-                className={styles.btn}
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    cartStore.plus(product.id)
-                }}>+</Button>
-        </div >
+        <QuantityStepper
+            value={quantity}
+            onDecrease={() => cartStore.minus(product.id)}
+            onIncrease={() => cartStore.plus(product.id)}
+        />
     )
 }
 

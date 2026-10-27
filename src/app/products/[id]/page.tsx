@@ -54,7 +54,7 @@ export default async function ProductPage({ params }: Props) {
 
         throw error;
     }
-    const related = await getRelatedItems(product.data.productCategory.id, id);
+    const related = await getRelatedItems(product.data.productCategory.id, product.data.id);
 
     return (
         <ProductPageClient product={product.data} related={related.data} />

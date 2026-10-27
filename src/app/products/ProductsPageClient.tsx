@@ -9,18 +9,19 @@ import { useLocalStore } from '@/shared/utils/useLocalStore';
 import CategoriesStore from '@/shared/stores/categories/CategoriesStore';
 import ProductsPageStore from '@shared/stores/products/ProductsPageStore';
 import { Product } from '@/shared/types/product';
+import { type Option } from '@shared/components/MultiDropdown';
 
 type Pagination = { page: number; pageSize: number; pageCount: number; total: number };
 
 interface Props {
   initialProducts: Product[];
   initialPagination: Pagination;
-  initialCategoriesOptions: { key: number; value: string }[];
+  initialCategoriesOptions: Option[];
   initialQuery: {
     page: number;
     search: string;
     sort: string;
-    categoryIds: number[];
+    categoryIds: string[];
   };
 }
 
