@@ -1,4 +1,4 @@
-import { loginRequest, logoutRequest, registerRequest, sessionRequest } from "@api/authorization";
+import { loginRequest, logoutRequest, sessionRequest } from "@api/authorization";
 import { makeAutoObservable, runInAction } from "mobx";
 import type { RootStore } from "../root/RootStore";
 import { AuthInitialState } from "../root/types";
@@ -86,38 +86,6 @@ export class AuthorizationStore {
         } catch (e: unknown) {
             runInAction(() => {
                 this.error = e instanceof Error ? e.message : "Authorization error";
-            });
-            throw e;
-        } finally {
-            runInAction(() => {
-                this.loading = false;
-            });
-        }
-    }
-
-    async register(username: string, email: string, password: string) {
-        runInAction(() => {
-            this.loading = true;
-            this.error = "";
-            this.ok = "";
-        });
-
-        try {
-            const response = await registerRequest({
-                username: username.trim(),
-                email: email.trim(),
-                password,
-            });
-
-            runInAction(() => {
-                this.user = response.user;
-                this.authorized = true;
-                this.initialized = true;
-                this.ok = `Account created: ${response.user.username}`;
-            });
-        } catch (e: unknown) {
-            runInAction(() => {
-                this.error = e instanceof Error ? e.message : "Registration error";
             });
             throw e;
         } finally {

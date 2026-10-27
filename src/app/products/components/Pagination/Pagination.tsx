@@ -14,9 +14,23 @@ const Pagination = ({ page, totalPages, onChange }: Props) => {
     onChange(p);
   };
 
-  const pages = [];
-  for (let i = 1; i <= totalPages; i++) {
+  const start = Math.max(1, page - 1);
+  const end = Math.min(totalPages, page + 2);
+
+  const pages: (number | 'gap-start' | 'gap-end')[] = [];
+
+  if (start > 1) {
+    pages.push(1);
+    if (start > 2) pages.push('gap-start');
+  }
+
+  for (let i = start; i <= end; i++) {
     pages.push(i);
+  }
+
+  if (end < totalPages) {
+    if (end < totalPages - 1) pages.push('gap-end');
+    pages.push(totalPages);
   }
 
   return (
@@ -29,7 +43,9 @@ const Pagination = ({ page, totalPages, onChange }: Props) => {
         height={35}
       />
       <div className={`${styles.pages__list}`}>
-        {pages.map((p) => (
+        {pages.map((p) => typeof p === 'string' ? (
+          <span key={p} className={styles.gap}>…</span>
+        ) : (
           <button
             key={p}
             className={`${styles.pagination__page} ${p === page ? styles.active : ''}`}

@@ -1,0 +1,49 @@
+@use '@shared/styles/variables.scss' as *;
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: $space-m;
+    padding: $space-l;
+    background-color: $card-bg;
+    border: 2px solid $divider;
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+        box-shadow: $shadow;
+    }
+
+    @include respond(s) {
+        padding: $space-m $space-s;
+    }
+}
+
+.list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: $space-m;
+    padding: $space-xs 0;
+    border-bottom: 1px solid $divider;
+
+    &:first-child {
+        padding-top: 0;
+    }
+
+    &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
+
+.value {
+    margin: 0;
+    text-align: right;
+    overflow-wrap: anywhere;
+}

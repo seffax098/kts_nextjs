@@ -1,0 +1,115 @@
+@use '@shared/styles/variables.scss' as *;
+
+.card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 1.586;
+    padding: $space-m;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    color: $button-primary-text;
+    background: linear-gradient(135deg, $button-primary-bg-hover 0%, $brand 45%, #2f4f4c 100%);
+    box-shadow: $shadow;
+    transition: transform 0.25s ease;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.08);
+        pointer-events: none;
+    }
+
+    &::before {
+        width: 240px;
+        height: 240px;
+        top: -110px;
+        right: -70px;
+    }
+
+    &::after {
+        width: 180px;
+        height: 180px;
+        bottom: -100px;
+        left: -40px;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+
+    @include respond(s) {
+        padding: $space-s;
+    }
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $space-s;
+}
+
+.chip {
+    width: 44px;
+    height: 32px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #f0dc9a 0%, #c7a955 100%);
+}
+
+.type {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+    text-align: right;
+}
+
+.number {
+    display: flex;
+    gap: $space-xs;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+
+    @include respond(s) {
+        font-size: 18px;
+        gap: $space-xxs;
+    }
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: $space-s;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.label {
+    font-size: 11px;
+    line-height: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.holder {
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

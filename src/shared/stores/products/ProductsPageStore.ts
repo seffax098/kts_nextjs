@@ -39,7 +39,7 @@ export default class ProductsPageStore implements ILocalStore {
     hydrateFromSSR(payload: {
         products: Product[];
         pagination: { pageCount: number; total: number };
-        query: { page: number; search: string; sort: string; categoryIds: number[] };
+        query: { page: number; search: string; sort: string; categoryIds: string[] };
     }) {
         this.queryStore.hydrate(payload.query);
         this.productsStore.hydrateFromSSR({
@@ -75,7 +75,7 @@ export default class ProductsPageStore implements ILocalStore {
         }, 350);
     }
 
-    changeCategories(ids: number[]) {
+    changeCategories(ids: string[]) {
         this.flushSearchDraft();
 
         const prevSearch = this.queryStore.buildSearch();

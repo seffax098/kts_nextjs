@@ -19,6 +19,7 @@
     width: 600px;
     height: 600px;
     overflow: hidden;
+    background-color: $card-image-bg;
 
     @include respond(xl) {
         width: 450px;
@@ -28,6 +29,7 @@
     @include respond(l) {
         width: 100%;
         height: auto;
+        aspect-ratio: 1;
     }
 }
 

@@ -3,45 +3,52 @@ import { cookies } from "next/headers";
 import { API_URL } from "@/shared/constants/api";
 import { AUTH_COOKIE_NAME, AUTH_COOKIE_OPTIONS } from "@/shared/constants/auth";
 
-type StrapiAuthResponse = {
-    jwt: string;
-    user: {
-        id: number;
-        username: string;
-        email: string;
-    };
+type DummyAuthResponse = {
+    accessToken: string;
+    refreshToken: string;
+    id: number;
+    username: string;
+    email: string;
 };
 
-export async function POST(request: Request) {
-    const body = await request.json();
+const TOKEN_EXPIRES_IN_MINS = AUTH_COOKIE_OPTIONS.maxAge / 60;
 
-    const res = await fetch(`${API_URL}/auth/local`, {
+export async function POST(request: Request) {
+    const { identifier, password } = (await request.json()) as { identifier?: string; password?: string };
+
+    const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({
+            username: identifier,
+            password,
+            expiresInMins: TOKEN_EXPIRES_IN_MINS,
+        }),
         cache: "no-store",
     });
 
-    const data = (await res.json().catch(() => null)) as StrapiAuthResponse | { error?: { message?: string } } | null;
+    const data = (await res.json().catch(() => null)) as DummyAuthResponse | { message?: string } | null;
 
     if (!res.ok) {
         return NextResponse.json(
-            data ?? { error: { message: "Ошибка авторизации" } },
+            data ?? { message: "Ошибка авторизации" },
             { status: res.status }
         );
     }
 
-    if (!data || !("jwt" in data) || !("user" in data)) {
+    if (!data || !("accessToken" in data)) {
         return NextResponse.json(
-            { error: { message: "Некорректный ответ сервера" } },
+            { message: "Некорректный ответ сервера" },
             { status: 500 }
         );
     }
 
     const cookieStore = await cookies();
-    cookieStore.set(AUTH_COOKIE_NAME, data.jwt, AUTH_COOKIE_OPTIONS);
+    cookieStore.set(AUTH_COOKIE_NAME, data.accessToken, AUTH_COOKIE_OPTIONS);
 
-    return NextResponse.json({ user: data.user });
+    return NextResponse.json({
+        user: { id: data.id, username: data.username, email: data.email },
+    });
 }

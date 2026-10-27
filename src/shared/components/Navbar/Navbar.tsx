@@ -7,13 +7,16 @@ import Logo from './Logo';
 import styles from './styles.module.scss';
 import { useState } from 'react';
 import Link from 'next/link';
-import { useCartStore } from '@/shared/stores/root/hooks';
+import { useAuthStore, useCartStore } from '@/shared/stores/root/hooks';
 import { observer } from 'mobx-react-lite';
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const cartStore = useCartStore()
+  const authStore = useAuthStore()
+  const accountHref = authStore.isAuth ? '/account' : '/authorization'
+  const isAccountActive = pathname === '/account' || pathname === '/authorization'
 
   return (
     <header className={`${styles.navbar}`}>
@@ -47,10 +50,10 @@ const Navbar = () => {
               <Bag width={30} height={30} color={`${pathname === '/cart' ? 'accent' : 'primary'}`} />
             </span>
           </Link>
-          <Link href={'/authorization'}
-            className={`${pathname === '/authorization' ? styles.link__activeIcon : styles.noactive} ${styles.link}`}>
+          <Link href={accountHref}
+            className={`${isAccountActive ? styles.link__activeIcon : styles.noactive} ${styles.link}`}>
             <span className={`${styles.navbar__user}`}>
-              <User width={30} height={30} color={`${pathname === '/authorization' ? 'accent' : 'primary'}`} />
+              <User width={30} height={30} color={`${isAccountActive ? 'accent' : 'primary'}`} />
             </span>
           </Link>
         </div>
@@ -83,12 +86,12 @@ const Navbar = () => {
               </Link>
             </div>
             <div className={styles.mobileMenu__right}>
-              <Link href={'/authorization'}
+              <Link href={accountHref}
                 onClick={() => setIsMenuOpen(false)}>
                 <Text
                   className={`${styles.mobile__navbar__account}`}
-                  view={`${pathname === '/authorization' ? 'p-20' : 'p-18'}`}
-                  color={`${pathname === '/authorization' ? 'accent' : 'primary'}`}
+                  view={`${isAccountActive ? 'p-20' : 'p-18'}`}
+                  color={`${isAccountActive ? 'accent' : 'primary'}`}
                 >
                   Account
                 </Text>

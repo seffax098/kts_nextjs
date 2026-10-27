@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { API_URL } from "@/shared/constants/api";
 import { AUTH_COOKIE_NAME } from "@/shared/constants/auth";
+import { getCartProducts, readCart } from "@/api/cart-cookie";
 
 export async function GET() {
     const token = (await cookies()).get(AUTH_COOKIE_NAME)?.value;
@@ -13,21 +13,7 @@ export async function GET() {
         );
     }
 
-    const res = await fetch(`${API_URL}/cart`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-        cache: "no-store",
-    });
+    const products = await getCartProducts(await readCart());
 
-    const data = await res.json().catch(() => null);
-
-    if (!res.ok) {
-        return NextResponse.json(
-            data ?? { error: { message: "Не удалось загрузить корзину" } },
-            { status: res.status }
-        );
-    }
-
-    return NextResponse.json(data);
+    return NextResponse.json(products);
 }

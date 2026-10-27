@@ -2,7 +2,7 @@ import { API_URL } from "@/shared/constants/api";
 import qs from "qs";
 
 
-export async function strapiGet<T>(
+export async function apiGet<T>(
     path: string,
     params?: Record<string, unknown>,
     opts?: { revalidate?: number; tags?: string[] }
@@ -15,13 +15,13 @@ export async function strapiGet<T>(
     });
 
     if (!res.ok) {
-        throw new Error(`Strapi error ${res.status} for ${url}`);
+        throw new Error(`API error ${res.status} for ${url}`);
     }
 
     return (await res.json()) as T;
 }
 
-export async function strapiPost<T>(
+export async function apiPost<T>(
     path: string,
     body: Record<string, unknown>,
     opts?: { revalidate?: number; tags?: string[] }
@@ -38,7 +38,7 @@ export async function strapiPost<T>(
     });
 
     if (!res.ok) {
-        throw new Error(`Strapi error ${res.status} for ${url}`);
+        throw new Error(`API error ${res.status} for ${url}`);
     }
 
     return (await res.json()) as T;

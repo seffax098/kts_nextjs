@@ -26,7 +26,7 @@ const Products = ({ pageStore, categoriesStore }: Props) => {
   }, [pageStore]);
 
   const handleDropdownChangeCat = useCallback((value: Option[]) => {
-    pageStore.changeCategories(value.map((item) => Number(item.key)));
+    pageStore.changeCategories(value.map((item) => String(item.key)));
   }, [pageStore]);
 
   const handleDropdownChangeSort = useCallback((value: Option[]) => {
@@ -71,11 +71,12 @@ const Products = ({ pageStore, categoriesStore }: Props) => {
 
         {!productsStore.loading && (
           <ul className={styles.products__list}>
-            {productsStore.products.map((product) => {
+            {productsStore.products.map((product, index) => {
               return (
                 <ProductListItem
                   key={product.documentId}
                   product={product}
+                  preload={index < 3}
                 />
               );
             })}

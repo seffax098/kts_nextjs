@@ -21,13 +21,6 @@ export function loginRequest(params: { identifier: string; password: string }) {
     });
 }
 
-export function registerRequest(params: { username: string; email: string; password: string; }) {
-    return apiFetch<AuthResponse>("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(params),
-    });
-}
-
 export function logoutRequest() {
     return apiFetch<{ ok: true }>("/api/auth/logout", {
         method: "POST",

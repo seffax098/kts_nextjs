@@ -2,10 +2,11 @@
 import { ProductCart } from "@/shared/types/product";
 import styles from './CartItem.module.scss'
 import Text from "@shared/components/Text";
-import Button from "@shared/components/Button";
+import QuantityStepper from "@shared/components/QuantityStepper";
 import Link from "next/link";
 import Image from "next/image";
 import { observer } from "mobx-react-lite";
+import { formatPrice } from "@shared/utils/formatPrice";
 
 interface Props {
     product: ProductCart;
@@ -14,37 +15,46 @@ interface Props {
 }
 
 const CartItem = ({ product, onPlus, onMinus }: Props) => {
-    const imageUrl = product.product?.images?.[0]?.url;
-    const prodId = product.product.id
+    const { product: item, quantity } = product;
+    const imageUrl = item.images?.[0]?.url;
+    const href = `/products/${item.documentId}`;
 
     return (
-        <li className={styles.products__item} key={product.id}>
-            <Image src={imageUrl} className={styles.image} alt={product.product.title} width={500} height={500} loading="eager"/>
+        <li className={styles.item}>
+            <Link href={href} className={styles.item__image}>
+                {imageUrl && (
+                    <Image
+                        src={imageUrl}
+                        className={styles.image}
+                        alt={item.title}
+                        width={160}
+                        height={160}
+                        sizes="(max-width: 768px) 96px, 160px"
+                    />
+                )}
+            </Link>
 
-            <div className={styles.productContent}>
-                <div className={styles.title}>
-                    <Link href={`/products/${product.product.documentId}`} className={styles.link}>
-                        <Text view="subtitle" className={styles.title}>{product.product.rating + '⭐  ' + product.product.title}</Text>
-                    </Link>
-                </div>
+            <div className={styles.item__info}>
+                <Text view="p-14" color="secondary" className={styles.caption}>
+                    {item.productCategory.title}
+                </Text>
+                <Link href={href} className={styles.link}>
+                    <Text view="p-20" weight="medium" maxLines={2}>{item.title}</Text>
+                </Link>
+                <Text view="p-16" color="secondary">
+                    {`⭐ ${item.rating} · $${formatPrice(item.price)} each`}
+                </Text>
+            </div>
 
-                <div className={styles.setQuantity}>
-                    <div className={styles.minus}>
-                        <Button onClick={() => onMinus(prodId)} className={styles.btn}>−</Button>
-                    </div>
-
-                    <div className={styles.quantity}>
-                        <Text view="p-20" className={styles.quanText}>{product.quantity}</Text>
-                    </div>
-
-                    <div className={styles.plus}>
-                        <Button onClick={() => onPlus(prodId)} className={styles.btn}>+</Button>
-                    </div>
-                </div>
-
-                <div className={styles.Price}>
-                    <Text view="p-20" className={styles.priceText}>Price: ${product.product.price * product.quantity}</Text>
-                </div>
+            <div className={styles.item__controls}>
+                <QuantityStepper
+                    value={quantity}
+                    onDecrease={() => onMinus(item.id)}
+                    onIncrease={() => onPlus(item.id)}
+                />
+                <Text view="p-20" weight="bold" className={styles.price}>
+                    ${formatPrice(item.price * quantity)}
+                </Text>
             </div>
         </li>
     );

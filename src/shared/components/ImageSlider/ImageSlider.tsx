@@ -1,11 +1,31 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import ArrowRight from "../icons/ArrowRight";
 import styles from "./ImageSlider.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const IMAGE_SIZE = 600;
+const SIZES = "(max-width: 1024px) 100vw, (max-width: 1440px) 450px, 600px";
 
 const ImageSlider = ({ images }: { images: { url: string }[] }) => {
     const [current, setCurrent] = useState(0);
     const currentUrl = images[current].url;
+
+    useEffect(() => {
+        if (images.length < 2) return;
+
+        const neighbours = new Set([
+            images[(current + 1) % images.length].url,
+            images[(current - 1 + images.length) % images.length].url,
+        ]);
+
+        neighbours.forEach((src) => {
+            const { props } = getImageProps({ src, alt: "", width: IMAGE_SIZE, height: IMAGE_SIZE, sizes: SIZES });
+            const img = new window.Image();
+            if (props.sizes) img.sizes = props.sizes;
+            if (props.srcSet) img.srcset = props.srcSet;
+            img.src = props.src;
+        });
+    }, [current, images]);
 
     const handlePrev = () => {
         setCurrent((prev) => (prev - 1 + images.length) % images.length);
@@ -22,10 +42,10 @@ const ImageSlider = ({ images }: { images: { url: string }[] }) => {
                     src={currentUrl}
                     alt={`Product image`}
                     className={styles.sliderImage}
-                    width={600}
-                    height={600}
-                    priority={current === 0}
-                    sizes="(max-width: 1024px) 100vw, 600px"
+                    width={IMAGE_SIZE}
+                    height={IMAGE_SIZE}
+                    preload={current === 0}
+                    sizes={SIZES}
                 />
                 <ArrowRight className={`${styles.next} ${styles.icon}`} onClick={handleNext} width={35} height={35} />
             </div>

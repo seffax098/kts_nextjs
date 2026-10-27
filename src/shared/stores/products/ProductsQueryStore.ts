@@ -8,7 +8,7 @@ export default class ProductsQueryStore implements ILocalStore {
     search = "";
     searchDraft = "";
     sort = "";
-    categoryIds: number[] = [];
+    categoryIds: string[] = [];
 
     constructor() {
         makeAutoObservable(this, {
@@ -20,7 +20,7 @@ export default class ProductsQueryStore implements ILocalStore {
         page: number;
         search: string;
         sort: string;
-        categoryIds: number[];
+        categoryIds: string[];
     }) {
         this.page = query.page;
         this.search = query.search;
@@ -40,8 +40,7 @@ export default class ProductsQueryStore implements ILocalStore {
         const sort = params.get("sort") ?? "";
         const categoryIds = (params.get("categories") ?? "")
             .split(",")
-            .map(Number)
-            .filter(Number.isFinite);
+            .filter(Boolean);
 
         this.page = page;
         this.search = search;
@@ -82,7 +81,7 @@ export default class ProductsQueryStore implements ILocalStore {
         this.page = 1;
     }
 
-    setCategories(ids: number[]) {
+    setCategories(ids: string[]) {
         this.categoryIds = ids;
         this.page = 1;
     }

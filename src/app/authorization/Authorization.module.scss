@@ -22,11 +22,8 @@
     background-color: $button-primary-bg-disabled;
 }
 
-.setIsLogin {
-    background-color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
+.testLogin {
+    text-align: center;
 }
 
 .error {
@@ -41,8 +38,6 @@
     }
 }
 
-.registration {
-    @include respond(s) {
-        font-size: 28px;
-    }
+.linkButton {
+    text-decoration: none;
 }

@@ -67,7 +67,7 @@ export default class CategoriesStore implements ILocalStore {
         }
     }
 
-    hydrateFromSSR(options: { key: number; value: string }[]) {
+    hydrateFromSSR(options: Option[]) {
         this.categories = options;
         this.loaded = true;
         this.loading = false;
