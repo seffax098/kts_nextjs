@@ -3,6 +3,7 @@ import { ProductCart } from "@/shared/types/product";
 import styles from './CartItem.module.scss'
 import Text from "@shared/components/Text";
 import QuantityStepper from "@shared/components/QuantityStepper";
+import Rating from "@shared/components/Rating";
 import Link from "next/link";
 import Image from "next/image";
 import { observer } from "mobx-react-lite";
@@ -17,7 +18,7 @@ interface Props {
 const CartItem = ({ product, onPlus, onMinus }: Props) => {
     const { product: item, quantity } = product;
     const imageUrl = item.images?.[0]?.url;
-    const href = `/products/${item.documentId}`;
+    const href = `/products/${item.id}`;
 
     return (
         <li className={styles.item}>
@@ -41,9 +42,10 @@ const CartItem = ({ product, onPlus, onMinus }: Props) => {
                 <Link href={href} className={styles.link}>
                     <Text view="p-20" weight="medium" maxLines={2}>{item.title}</Text>
                 </Link>
-                <Text view="p-16" color="secondary">
-                    {`⭐ ${item.rating} · $${formatPrice(item.price)} each`}
-                </Text>
+                <div className={styles.meta}>
+                    <Rating value={item.rating} />
+                    <Text tag="span" view="p-16" color="secondary">{`$${formatPrice(item.price)} each`}</Text>
+                </div>
             </div>
 
             <div className={styles.item__controls}>

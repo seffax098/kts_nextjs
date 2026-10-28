@@ -1,3 +1,5 @@
+@use '@shared/styles/variables.scss' as *;
+
 .pagination {
     display: flex;
     align-items: center;
@@ -22,15 +24,15 @@
 }
 
 .active {
-    background-color: #518581;
-    color: white;
+    background-color: $brand;
+    color: $button-primary-text;
 }
 
 .gap {
     display: inline-block;
     width: 38px;
     text-align: center;
-    color: #afadb5;
+    color: $text-secondary;
 }
 
 .pages__list {

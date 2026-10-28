@@ -15,7 +15,7 @@
 .product__left {
     width: 600px;
     height: 600px;
-    background-color: rgba(217, 217, 217, 1);
+    background-color: $skeleton-bg;
 
     @include respond(xl) {
         width: 450px;
@@ -74,31 +74,31 @@
 }
 
 .button__addToCart {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 120px;
     height: 40px;
 }
 
 .button__buy {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 120px;
     height: 40px;
 }
 
 .price {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 70px;
     height: 40px;
 }
 
 .title {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 500px;
     height: 40px;
 }
 
 .subtitle {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 150px;
     height: 40px;
 }

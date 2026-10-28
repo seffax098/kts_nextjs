@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
         exclassname
       )}
     >
-      {loading && <Loader className={styles.loader} size='s' color='#FFF' />}
+      {loading && <Loader className={styles.loader} size='s' />}
       <Text view='button' className={styles.buttonText}>{children}</Text>
     </button>
   )

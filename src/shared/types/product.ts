@@ -1,7 +1,3 @@
-export type StrapiItem<T> = {
-  id: number;
-} & T;
-
 export interface Image {
   url: string;
 }
@@ -11,9 +7,9 @@ export interface ProductCategory {
   id: string;
 }
 
-export interface ProductAttributes {
+export interface Product {
+  id: number;
   title: string;
-  documentId: string;
   description: string;
   price: number;
   images: Image[];
@@ -23,27 +19,18 @@ export interface ProductAttributes {
   createdAt: string;
 }
 
-export type Item<T> = {
+export interface ProductCart {
   id: number;
-  quantity: number
-  product: T;
+  quantity: number;
+  product: Product;
 }
 
-export interface ProductCartAttributes {
-  title: string;
-  documentId: string;
-  id: number;
-  description: string;
-  price: number;
-  images: Image[];
-  rating: number;
-  isInStock: boolean;
-  productCategory: ProductCategory;
+export interface Pagination {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
 }
-
-
-export type Product = StrapiItem<ProductAttributes>;
-export type ProductCart = Item<ProductCartAttributes>
 
 export interface DummyProduct {
   id: number;

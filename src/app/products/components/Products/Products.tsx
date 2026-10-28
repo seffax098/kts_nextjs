@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import Input from '@shared/components/Input';
 import { type Option } from '@shared/components/MultiDropdown';
 import Text from '@shared/components/Text';
+import Button from '@shared/components/Button';
 import styles from './Products.module.scss';
 import Pagination from '../Pagination';
 import CardSkeleton from '@shared/components/CardSkeleton';
@@ -69,12 +70,26 @@ const Products = ({ pageStore, categoriesStore }: Props) => {
       <div className={styles.products__bottom}>
         {productsStore.loading && <CardSkeleton />}
 
-        {!productsStore.loading && (
+        {!productsStore.loading && productsStore.products.length === 0 && (
+          <div className={styles.empty}>
+            <Text view="subtitle">Nothing found</Text>
+            <Text view="p-20" color="secondary">
+              {pageStore.hasFilters
+                ? 'Try changing your search or filters.'
+                : 'There are no products yet.'}
+            </Text>
+            {pageStore.hasFilters && (
+              <Button onClick={pageStore.resetFilters}>Reset filters</Button>
+            )}
+          </div>
+        )}
+
+        {!productsStore.loading && productsStore.products.length > 0 && (
           <ul className={styles.products__list}>
             {productsStore.products.map((product, index) => {
               return (
                 <ProductListItem
-                  key={product.documentId}
+                  key={product.id}
                   product={product}
                   preload={index < 3}
                 />

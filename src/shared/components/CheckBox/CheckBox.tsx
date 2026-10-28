@@ -46,12 +46,12 @@ const CheckBox: React.FC<CheckBoxProps> = ({
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 40 40"
           fill="none">
-          <path d="M6.66663 19.3548L16.4625 30L33.3333 11.6667" stroke="#518581" stroke-width="3.33333" />
+          <path d="M6.66663 19.3548L16.4625 30L33.3333 11.6667" stroke="currentColor" strokeWidth="3.33333" />
         </svg>
       )}
 
       {disabled && checked && (
-        <svg className={classNames(styles.checkboxIcon, {
+        <svg className={classNames(styles.checkboxIcon, styles.checkboxIconDisabled, {
           [styles.checkboxIconActive]: checked
         })}
           xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
           height="40"
           viewBox="0 0 40 40"
           fill="none">
-          <path d="M6.66663 19.3548L16.4625 30L33.3333 11.6667" stroke="black" stroke-opacity="0.2" stroke-width="3.33333" />
+          <path d="M6.66663 19.3548L16.4625 30L33.3333 11.6667" stroke="currentColor" strokeWidth="3.33333" />
         </svg>
       )}
     </div>

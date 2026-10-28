@@ -1,7 +1,9 @@
+@use '@shared/styles/variables.scss' as *;
+
 .relatedItem__link {
     text-decoration: none;
 }
 
 .relatedItem {
-    color: black;
+    color: $text-primary;
 }

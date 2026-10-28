@@ -1,7 +1,6 @@
-import { cookies } from "next/headers";
 import { API_URL } from "@/shared/constants/api";
-import { AUTH_COOKIE_NAME } from "@/shared/constants/auth";
 import type { DummyUser, UserProfile } from "@/shared/types/user";
+import { getSessionToken } from "./session";
 
 const toUserProfile = (u: DummyUser): UserProfile => ({
     id: u.id,
@@ -38,7 +37,7 @@ const toUserProfile = (u: DummyUser): UserProfile => ({
 });
 
 export async function getCurrentUser(): Promise<UserProfile | null> {
-    const token = (await cookies()).get(AUTH_COOKIE_NAME)?.value;
+    const token = await getSessionToken();
 
     if (!token) return null;
 

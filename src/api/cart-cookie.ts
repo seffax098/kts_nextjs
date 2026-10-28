@@ -3,9 +3,9 @@ import { AUTH_COOKIE_OPTIONS } from "@/shared/constants/auth";
 import type { ProductCart } from "@/shared/types/product";
 import { getProductsById } from "./products";
 
-export const CART_COOKIE_NAME = "cart";
-
 export type CartEntry = { productId: number; quantity: number };
+
+const getCartCookieName = (userId: number) => `cart_${userId}`;
 
 const isCartEntry = (value: unknown): value is CartEntry => {
     const entry = value as CartEntry;
@@ -17,8 +17,8 @@ const isCartEntry = (value: unknown): value is CartEntry => {
     );
 };
 
-export async function readCart(): Promise<CartEntry[]> {
-    const raw = (await cookies()).get(CART_COOKIE_NAME)?.value;
+export async function readCart(userId: number): Promise<CartEntry[]> {
+    const raw = (await cookies()).get(getCartCookieName(userId))?.value;
 
     if (!raw) return [];
 
@@ -30,8 +30,8 @@ export async function readCart(): Promise<CartEntry[]> {
     }
 }
 
-export async function writeCart(entries: CartEntry[]) {
-    (await cookies()).set(CART_COOKIE_NAME, JSON.stringify(entries), AUTH_COOKIE_OPTIONS);
+export async function writeCart(userId: number, entries: CartEntry[]) {
+    (await cookies()).set(getCartCookieName(userId), JSON.stringify(entries), AUTH_COOKIE_OPTIONS);
 }
 
 export async function getCartProducts(entries: CartEntry[]): Promise<ProductCart[]> {

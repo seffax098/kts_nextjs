@@ -1,3 +1,5 @@
+@use '@shared/styles/variables.scss' as *;
+
 .products__item {
     list-style-type: none;
     width: 100%;
@@ -10,5 +12,5 @@
 }
 
 .product__card {
-    color: black;
+    color: $text-primary;
 }

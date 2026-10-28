@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Корзина",
-    description: "Корзина в магазине Lalasia.",
+    title: "Cart",
+    description: "Your cart in the Lalasia store.",
 };
 
 export { default } from './CartPageClient';

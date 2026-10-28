@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { addToCart, getCart, removeFromCart } from "@api/cart";
+import { ApiError } from "@api/client";
 import type { ProductCart } from "@shared/types/product";
 import { RootStore } from "../root/RootStore";
 import { CartInitialState } from "../root/types";
@@ -60,15 +61,13 @@ export class CartStore {
             });
         } catch (e: unknown) {
             runInAction(() => {
-                const message =
-                    e instanceof Error ? e.message : "Failed to load cart";
-
-                this.error = message;
-
-                if (message === "Не авторизован") {
+                if (e instanceof ApiError && e.status === 401) {
                     this.rootStore.authStore.resetAuth("Session expired, please log in again");
                     this.products = [];
+                    return;
                 }
+
+                this.error = e instanceof Error ? e.message : "Failed to load cart";
             });
         } finally {
             runInAction(() => {

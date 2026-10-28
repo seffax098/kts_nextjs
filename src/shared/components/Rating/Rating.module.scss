@@ -1,0 +1,78 @@
+@use '@shared/styles/variables.scss' as *;
+
+.rating {
+    --star-size: 14px;
+    --star-gap: 2px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.rating-s {
+    --star-size: 14px;
+
+    .value {
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
+
+.rating-m {
+    --star-size: 18px;
+    gap: $space-xxs;
+
+    .value {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+.rating-l {
+    --star-size: 24px;
+    --star-gap: 3px;
+    gap: $space-xs;
+
+    .value {
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+.stars {
+    position: relative;
+    display: inline-flex;
+    line-height: 0;
+}
+
+.starsEmpty,
+.starsFilled {
+    display: inline-flex;
+    gap: var(--star-gap);
+}
+
+.starsEmpty {
+    color: $card-image-bg;
+}
+
+.starsFilled {
+    position: absolute;
+    inset: 0 auto 0 0;
+    overflow: hidden;
+    color: $brand;
+}
+
+.star {
+    flex-shrink: 0;
+    width: var(--star-size);
+    height: var(--star-size);
+    fill: currentColor;
+}
+
+.value {
+    font-weight: 700;
+    color: $text-primary;
+    font-variant-numeric: tabular-nums;
+}

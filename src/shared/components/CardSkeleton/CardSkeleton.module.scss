@@ -18,7 +18,7 @@
     box-sizing: border-box;
     width: 350px;
     height: 350px;
-    background-color: rgba(217, 217, 217, 1);
+    background-color: $skeleton-bg;
 }
 
 .cardBody {
@@ -38,7 +38,7 @@
 }
 
 .captionSlot {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 240px;
     height: 18px;
 }
@@ -51,19 +51,19 @@
 }
 
 .cardTitle {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 336px;
     height: 48px;
 }
 
 .cardSubtitle {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 336px;
     height: 14px;
 }
 
 .cardActionSlot {
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: $skeleton-bg-light;
     width: 149px;
     height: 52px;
 }

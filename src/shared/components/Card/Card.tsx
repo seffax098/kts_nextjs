@@ -26,11 +26,13 @@ export type CardProps = {
     /** Слот для действия */
     actionSlot?: React.ReactNode;
     preload?: boolean;
+    imageAlt?: string;
 };
 
 const Card: React.FC<CardProps> = ({
     className,
     image,
+    imageAlt = '',
     captionSlot,
     title,
     subtitle,
@@ -48,7 +50,7 @@ const Card: React.FC<CardProps> = ({
                 {nearViewport && (
                     <Image
                         src={image}
-                        alt="Фото товара"
+                        alt={imageAlt}
                         className={styles.cardImage}
                         width={400}
                         height={400}
@@ -60,7 +62,7 @@ const Card: React.FC<CardProps> = ({
             </div>
             <div className={styles.cardBody}>
                 <div className={styles.cardText}>
-                    {captionSlot && <p className={styles.captionSlot}>{captionSlot}</p>}
+                    {captionSlot && <div className={styles.captionSlot}>{captionSlot}</div>}
                     <Text
                         className={styles.cardTitle}
                         view='p-20'

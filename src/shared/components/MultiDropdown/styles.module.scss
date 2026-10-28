@@ -73,11 +73,11 @@
 }
 
 .inputDropdown::placeholder {
-    color: #8f8f8f;
+    color: $dropdown-placeholder;
     opacity: 1;
 }
 
 .selectedPlaceholder::placeholder {
-    color: #000;
+    color: $text-primary;
     opacity: 1;
 }

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import type { Product } from "@shared/types/product";
+import type { Pagination, Product } from "@shared/types/product";
 import type { ILocalStore } from "@shared/utils/useLocalStore";
 import ProductsQueryStore from "./ProductsQueryStore";
 import ProductsStore from "./ProductsStore";
@@ -38,7 +38,7 @@ export default class ProductsPageStore implements ILocalStore {
 
     hydrateFromSSR(payload: {
         products: Product[];
-        pagination: { pageCount: number; total: number };
+        pagination: Pick<Pagination, "pageCount" | "total">;
         query: { page: number; search: string; sort: string; categoryIds: string[] };
     }) {
         this.queryStore.hydrate(payload.query);
@@ -97,6 +97,20 @@ export default class ProductsPageStore implements ILocalStore {
         const prevSearch = this.queryStore.buildSearch();
         this.queryStore.setPage(page);
         this.navigateIfChanged(prevSearch, false);
+    }
+
+    resetFilters() {
+        this.clearSearchTimer();
+
+        const prevSearch = this.queryStore.buildSearch();
+        this.queryStore.commitSearch("");
+        this.queryStore.setCategories([]);
+        this.queryStore.setSort("");
+        this.navigateIfChanged(prevSearch, true);
+    }
+
+    get hasFilters() {
+        return Boolean(this.queryStore.search || this.queryStore.categoryIds.length);
     }
 
     get selectedSort() {

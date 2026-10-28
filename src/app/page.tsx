@@ -5,8 +5,8 @@ import ProductsPageClient from "./products/ProductsPageClient";
 import styles from "./Error.module.scss";
 
 export const metadata = {
-    title: 'Каталог товаров',
-    description: 'Каталог товаров с возможностью поиска, фильтрации и сортировки. Удобный интерфейс для выбора и покупки товаров.',
+    title: 'Products',
+    description: 'Product catalog with search, filters and sorting. A convenient way to choose and buy products.',
 }
 
 type SearchParams = Promise<{

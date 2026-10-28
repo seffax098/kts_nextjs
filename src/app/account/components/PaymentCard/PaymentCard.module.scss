@@ -11,7 +11,7 @@
     justify-content: space-between;
     overflow: hidden;
     color: $button-primary-text;
-    background: linear-gradient(135deg, $button-primary-bg-hover 0%, $brand 45%, #2f4f4c 100%);
+    background: linear-gradient(135deg, $button-primary-bg-hover 0%, $brand 45%, $brand-dark 100%);
     box-shadow: $shadow;
     transition: transform 0.25s ease;
 
@@ -20,7 +20,7 @@
         content: '';
         position: absolute;
         border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: $payment-card-decor;
         pointer-events: none;
     }
 
@@ -58,7 +58,7 @@
     width: 44px;
     height: 32px;
     border-radius: 6px;
-    background: linear-gradient(135deg, #f0dc9a 0%, #c7a955 100%);
+    background: linear-gradient(135deg, $payment-card-chip-light 0%, $payment-card-chip-dark 100%);
 }
 
 .type {

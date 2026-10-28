@@ -18,7 +18,7 @@ const RelatedItems = ({ relatedItems, loading }: Props) => {
         {relatedItems.map((item) => {
           return (
             <RelatedItem
-              key={item.documentId}
+              key={item.id}
               item={item}
             />
           )
