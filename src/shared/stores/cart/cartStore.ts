@@ -130,7 +130,7 @@ export class CartStore {
                     item.quantity = prevQuantity;
                 }
             });
-            console.error("Error deleting from recycle bin:", e);
+            console.error("Error removing from cart:", e);
         }
     }
 
