@@ -7,7 +7,7 @@ enableStaticRendering(isServer);
 
 configure({
     useProxies: "ifavailable",
-    computedRequiresReaction: true,
+    computedRequiresReaction: !isServer,
     reactionRequiresObservable: true,
-    observableRequiresReaction: true,
+    observableRequiresReaction: !isServer,
 });

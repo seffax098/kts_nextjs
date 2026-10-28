@@ -1,5 +1,5 @@
 import { makeAutoObservable, observable } from "mobx";
-import type { Product } from "@shared/types/product";
+import type { Pagination, Product } from "@shared/types/product";
 import type { ILocalStore } from "@shared/utils/useLocalStore";
 
 export default class ProductsStore implements ILocalStore {
@@ -15,7 +15,7 @@ export default class ProductsStore implements ILocalStore {
 
     hydrateFromSSR(payload: {
         products: Product[];
-        pagination: { pageCount: number; total: number };
+        pagination: Pick<Pagination, "pageCount" | "total">;
     }) {
         this.products = payload.products;
         this.totalPages = payload.pagination.pageCount;

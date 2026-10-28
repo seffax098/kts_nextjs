@@ -23,19 +23,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             title: product.data.title,
             description:
                 product.data.description ||
-                "Карточка товара в магазине Lalasia.",
+                "Product page in the Lalasia store.",
         };
     } catch (error) {
         if (is404Error(error)) {
             return {
-                title: "Товар не найден",
-                description: "Запрашиваемый товар не найден.",
+                title: "Product not found",
+                description: "The requested product was not found.",
             };
         }
 
         return {
-            title: "Товар",
-            description: "Карточка товара в магазине Lalasia.",
+            title: "Product",
+            description: "Product page in the Lalasia store.",
         };
     }
 }

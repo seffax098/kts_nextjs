@@ -1,7 +1,6 @@
-import type { DummyProduct, DummyProductsResponse, Product } from "@/shared/types/product";
+import type { DummyProduct, DummyProductsResponse, Pagination, Product } from "@/shared/types/product";
 import { apiGet } from "./fetch";
 
-type Pagination = { page: number; pageSize: number; pageCount: number; total: number };
 export type ProductsResponse = { data: Product[]; meta: { pagination: Pagination } };
 
 const PAGE_SIZE = 25;
@@ -10,15 +9,20 @@ const SORT_FIELDS = ["price", "rating", "title"] as const;
 type SortField = (typeof SORT_FIELDS)[number];
 type Sort = { sortBy: SortField; order: "asc" | "desc" };
 
+export const formatCategoryName = (slug: string) =>
+    slug
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
 const toProduct = (p: DummyProduct): Product => ({
     id: p.id,
-    documentId: String(p.id),
     title: p.title,
     description: p.description,
     price: p.price,
     rating: p.rating,
     images: (p.images.length ? p.images : [p.thumbnail]).map((url) => ({ url })),
-    productCategory: { id: p.category, title: p.category },
+    productCategory: { id: p.category, title: formatCategoryName(p.category) },
     isInStock: p.stock > 0,
     createdAt: p.meta.createdAt,
 });
@@ -86,7 +90,7 @@ export async function getProducts(args: {
         return toProductsResponse(products.slice(skip, skip + PAGE_SIZE), products.length, args.page);
     }
 
-    const params: Record<string, unknown> = {
+    const params: Record<string, string | number> = {
         limit: PAGE_SIZE,
         skip: (args.page - 1) * PAGE_SIZE,
     };

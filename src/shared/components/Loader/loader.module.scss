@@ -1,4 +1,7 @@
+@use '@shared/styles/variables.scss' as *;
+
 .loader {
+    color: $brand;
     animation: spin 2s linear infinite;
 }
 

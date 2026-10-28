@@ -1,24 +1,18 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { AUTH_COOKIE_NAME } from "@/shared/constants/auth";
 import { readCart, writeCart } from "@/api/cart-cookie";
+import { getSessionUserId, unauthorizedResponse } from "@/api/session";
 import type { CartAddRemoveBody } from "@/api/cart";
 
 export async function POST(request: Request) {
-    const token = (await cookies()).get(AUTH_COOKIE_NAME)?.value;
+    const userId = await getSessionUserId();
 
-    if (!token) {
-        return NextResponse.json(
-            { error: { message: "Не авторизован" } },
-            { status: 401 }
-        );
-    }
+    if (!userId) return unauthorizedResponse();
 
     const body = (await request.json().catch(() => null)) as CartAddRemoveBody | null;
     const productId = Number(body?.product);
     const quantity = Math.max(1, Number(body?.quantity ?? 1) || 1);
 
-    const cart = (await readCart())
+    const cart = (await readCart(userId))
         .map((entry) =>
             entry.productId === productId
                 ? { ...entry, quantity: entry.quantity - quantity }
@@ -26,7 +20,7 @@ export async function POST(request: Request) {
         )
         .filter((entry) => entry.quantity > 0);
 
-    await writeCart(cart);
+    await writeCart(userId, cart);
 
     return NextResponse.json(cart);
 }

@@ -1,12 +1,11 @@
-import { cookies } from "next/headers";
-import { AUTH_COOKIE_NAME } from "@/shared/constants/auth";
 import type { RootStoreInitialState } from "@/shared/stores/root/types";
 import { getCartProducts, readCart } from "./cart-cookie";
+import { getSessionUserId } from "./session";
 
 export async function getCartPageInitialState(): Promise<RootStoreInitialState> {
-    const token = (await cookies()).get(AUTH_COOKIE_NAME)?.value;
+    const userId = await getSessionUserId();
 
-    if (!token) {
+    if (!userId) {
         return {
             auth: { authorized: false, initialized: true },
             cart: { products: [], loading: false, error: "", initialized: true },
@@ -14,7 +13,7 @@ export async function getCartPageInitialState(): Promise<RootStoreInitialState> 
     }
 
     try {
-        const products = await getCartProducts(await readCart());
+        const products = await getCartProducts(await readCart(userId));
 
         return {
             auth: { authorized: true, initialized: true },
@@ -26,7 +25,7 @@ export async function getCartPageInitialState(): Promise<RootStoreInitialState> 
             cart: {
                 products: [],
                 loading: false,
-                error: "Не удалось загрузить корзину",
+                error: "Failed to load cart",
                 initialized: true,
             },
         };

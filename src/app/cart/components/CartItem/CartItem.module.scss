@@ -49,7 +49,13 @@
 .caption {
     font-weight: 500;
     line-height: 18px;
-    text-transform: capitalize;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $space-xs;
 }
 
 .link {

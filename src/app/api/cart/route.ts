@@ -1,19 +1,13 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { AUTH_COOKIE_NAME } from "@/shared/constants/auth";
 import { getCartProducts, readCart } from "@/api/cart-cookie";
+import { getSessionUserId, unauthorizedResponse } from "@/api/session";
 
 export async function GET() {
-    const token = (await cookies()).get(AUTH_COOKIE_NAME)?.value;
+    const userId = await getSessionUserId();
 
-    if (!token) {
-        return NextResponse.json(
-            { error: { message: "Не авторизован" } },
-            { status: 401 }
-        );
-    }
+    if (!userId) return unauthorizedResponse();
 
-    const products = await getCartProducts(await readCart());
+    const products = await getCartProducts(await readCart(userId));
 
     return NextResponse.json(products);
 }

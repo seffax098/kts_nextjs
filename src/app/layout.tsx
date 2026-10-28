@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const initialState = await getCartPageInitialState()
 
   return (
-    <html lang="ru" className={roboto.className}>
+    <html lang="en" className={roboto.className}>
       <body>
         <Providers initialState={initialState}>
           <Navbar />

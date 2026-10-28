@@ -5,6 +5,7 @@ import styles from './ProductPage.module.scss';
 import RelatedItems from './components/RelatedItems';
 import { useEffect } from 'react';
 import SkeletonCard from './components/SkeletonCard';
+import ScrollToTop from './components/ScrollToTop';
 import ProductStore from '@shared/stores/product/ProductStore';
 import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
@@ -12,7 +13,11 @@ import { useLocalStore } from '@/shared/utils/useLocalStore';
 import { Product } from '@/shared/types/product';
 
 const ProductPage = ({ product, related }: { product: Product; related: Product[] }) => {
-  const productStore = useLocalStore(() => new ProductStore())
+  const productStore = useLocalStore(() => {
+    const store = new ProductStore()
+    store.hydrateFromSSR({ product, relatedItems: related })
+    return store
+  })
 
   useEffect(() => {
     productStore.hydrateFromSSR({ product, relatedItems: related })
@@ -20,6 +25,7 @@ const ProductPage = ({ product, related }: { product: Product; related: Product[
 
   return (
     <div className={`${styles.productPage}`}>
+      <ScrollToTop key={product.id} />
       <Link
         href={'/'}
         className={`${styles.back__link}`}>

@@ -1,19 +1,21 @@
+@use '@shared/styles/variables.scss' as *;
+
 .icon {
     color: inherit;
 }
 
 .icon-primary {
-    color: #000000;
+    color: $text-primary;
 }
 
 .icon-secondary {
-    color: #afadb5;
+    color: $text-secondary;
 }
 
 .icon-accent {
-    color: #518581;
+    color: $brand;
 }
 
 .icon-disabled {
-    color: #afafaf;
+    color: $icon-disabled;
 }

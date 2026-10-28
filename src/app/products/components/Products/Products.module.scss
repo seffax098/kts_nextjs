@@ -50,3 +50,13 @@
         grid-template-columns: repeat(1, minmax(200px, 1fr));
     }
 }
+.empty {
+    max-width: 653px;
+    margin: 0 auto;
+    padding: $space-xl 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-m;
+    text-align: center;
+}

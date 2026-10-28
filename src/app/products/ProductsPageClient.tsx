@@ -8,10 +8,8 @@ import styles from './ProductsPage.module.scss';
 import { useLocalStore } from '@/shared/utils/useLocalStore';
 import CategoriesStore from '@/shared/stores/categories/CategoriesStore';
 import ProductsPageStore from '@shared/stores/products/ProductsPageStore';
-import { Product } from '@/shared/types/product';
+import type { Pagination, Product } from '@/shared/types/product';
 import { type Option } from '@shared/components/MultiDropdown';
-
-type Pagination = { page: number; pageSize: number; pageCount: number; total: number };
 
 interface Props {
   initialProducts: Product[];

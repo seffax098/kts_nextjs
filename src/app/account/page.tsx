@@ -7,8 +7,8 @@ import AccountPageClient from "./AccountPageClient";
 import SessionExpired from "./components/SessionExpired";
 
 export const metadata: Metadata = {
-    title: "Личный кабинет",
-    description: "Личный кабинет в магазине Lalasia.",
+    title: "My account",
+    description: "Your personal account in the Lalasia store.",
 };
 
 export default async function AccountPage() {

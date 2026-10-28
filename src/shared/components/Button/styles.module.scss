@@ -32,3 +32,7 @@
 .button:active {
     background-color: $button-primary-bg-active;
 }
+
+.button .loader {
+    color: $button-primary-text;
+}

@@ -33,14 +33,14 @@ export async function POST(request: Request) {
 
     if (!res.ok) {
         return NextResponse.json(
-            data ?? { message: "Ошибка авторизации" },
+            data ?? { message: "Login failed" },
             { status: res.status }
         );
     }
 
     if (!data || !("accessToken" in data)) {
         return NextResponse.json(
-            { message: "Некорректный ответ сервера" },
+            { message: "Invalid server response" },
             { status: 500 }
         );
     }

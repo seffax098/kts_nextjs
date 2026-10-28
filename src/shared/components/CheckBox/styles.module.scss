@@ -24,6 +24,11 @@
     width: 40px;
     height: 40px;
     pointer-events: none;
+    color: $brand;
+}
+
+.checkboxIconDisabled {
+    color: $checkbox-check-disabled;
 }
 
 .checkbox {

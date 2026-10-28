@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import AuthorizationPage from "./AuthorizationPage";
 
 export const metadata: Metadata = {
-    title: "Авторизация",
-    description: "Вход и регистрация в магазине Lalasia.",
+    title: "Log in",
+    description: "Log in to the Lalasia store.",
 };
 
 export default AuthorizationPage;
